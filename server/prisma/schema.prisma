@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model LangGroup {
+  id     Int      @id @default(autoincrement())
+  name   String   @unique
+  lang   Lang[]   @relation(name: "LangGroup")
+  census Census[] @relation(name: "CensLangGroup")
+}
+
+model Lang {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  langGroup   LangGroup @relation(name: "LangGroup", fields: [langGroupId], references: [id])
+  langGroupId Int
+  census      Census[]  @relation(name: "CensLang")
+}
+
+model Region {
+  id       Int      @id @default(autoincrement())
+  parentId Int      @unique
+  name     String   @unique
+  census   Census[] @relation(name: "CensRegion")
+}
+
+model Census {
+  id          Int       @id @default(autoincrement())
+  males       Int?
+  females     Int?
+  langGroup   LangGroup @relation(name: "CensLangGroup", fields: [langGroupId], references: [id])
+  langGroupId Int
+  lang        Lang?     @relation(name: "CensLang", fields: [langId], references: [id])
+  langId      Int?
+  region      Region    @relation(name: "CensRegion", fields: [regionId], references: [id])
+  regionId    Int
+}
