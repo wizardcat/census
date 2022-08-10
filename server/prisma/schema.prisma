@@ -27,8 +27,8 @@ model Lang {
 
 model Region {
   id       Int      @id @default(autoincrement())
-  parentId Int      @unique
-  name     String   @unique
+  parentId Int
+  name     String
   census   Census[] @relation(name: "CensRegion")
 }
 

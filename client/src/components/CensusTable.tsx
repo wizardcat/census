@@ -6,17 +6,19 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from '../redux/hooks'
+import { Censuses } from '../redux/actionTypes'
 
-const calcTotal = rows => {
+const calcTotal = (rows:Censuses) => {
+  
   return rows.reduce((prev, cur) => {
     return Number(prev) + Number(cur.males) + Number(cur.females)
   }, 0)
 }
 
-const CensusTable = () => {
-  const rows = useSelector(state => {
-    return state.censusRows.fetchedCensus
+const CensusTable: React.FC = () => {
+  const rows = useAppSelector(state => {
+    return state.census.fetchedCensus
   })
 
   const total = calcTotal(rows)
@@ -42,24 +44,24 @@ const CensusTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map(row => (
+              {rows.map((row,idx) => (
                 <TableRow
-                  key={row.id}
+                  key={++idx}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.id}
+                    {++idx}
                   </TableCell>
-                  <TableCell align="right">{row.lang}</TableCell>
-                  <TableCell align="right">{row.langGroup}</TableCell>
-                  <TableCell align="right">{row.males}</TableCell>
-                  <TableCell align="right">{row.females}</TableCell>
+                  <TableCell align="right">{row.lang.name}</TableCell>
+                  <TableCell align="right">{row.langGroup.name}</TableCell>
+                  <TableCell align="right">{row.males||''}</TableCell>
+                  <TableCell align="right">{row.females||''}</TableCell>
                   <TableCell align="right">
-                    {row.males + row.females || ''}
+                    {Number(row.males) + Number(row.females) || ''}
                   </TableCell>
                   <TableCell align="right">
                     {row.males || row.females
-                      ? (((row.males + row.females) * 100) / total).toFixed(2)
+                      ? (((Number(row.males) + Number(row.females)) * 100) / total).toFixed(2)
                       : ''}
                   </TableCell>
                 </TableRow>

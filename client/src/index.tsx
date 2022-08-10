@@ -1,14 +1,15 @@
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import store from './redux/store'
+import {store} from './redux/store'
 import { Provider } from 'react-redux'
-import { fetchRegions } from './redux/actions'
+import { getRegions } from './redux/regionSlice'
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
-store.dispatch(fetchRegions())
+store.dispatch(getRegions())
 
 root.render(
   <Provider store={store}>
