@@ -6,18 +6,19 @@ function App() {
   return (
     <BrowserRouter>
       <CssBaseline />
-
-      <Box
-        sx={{
-          backgroundColor: theme => theme.palette.grey[100],
-        }}
-      >
-        <Container maxWidth="xl">
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </Container>
-      </Box>
+      <div>
+        <Box
+          sx={{
+            backgroundColor: theme => theme.palette.grey[100],
+          }}
+        >
+          <Container maxWidth="xl">
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </Container>
+        </Box>
+      </div>
     </BrowserRouter>
   )
 }

@@ -14,7 +14,8 @@ export const getCensus = createAsyncThunk(
     'census/fetchCensus',
     async (regionId: number, thunkAPI) => {
         try {
-            const response = await axios.get(`http://localhost:3001/census/` + regionId);
+            let lang = 'ru'
+            const response = await axios.get(`http://localhost:3001/${lang}/census/${regionId}`);
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error);

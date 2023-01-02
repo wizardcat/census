@@ -9,8 +9,7 @@ import Grid from '@mui/material/Grid'
 import { useAppSelector } from '../redux/hooks'
 import { Censuses } from '../redux/actionTypes'
 
-const calcTotal = (rows:Censuses) => {
-  
+const calcTotal = (rows: Censuses) => {
   return rows.reduce((prev, cur) => {
     return Number(prev) + Number(cur.males) + Number(cur.females)
   }, 0)
@@ -44,24 +43,29 @@ const CensusTable: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row,idx) => (
+              {rows.map((row, idx) => (
                 <TableRow
-                  key={++idx}
+                  key={row.lang.name_ru}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
                     {++idx}
                   </TableCell>
-                  <TableCell align="right">{row.lang.name}</TableCell>
-                  <TableCell align="right">{row.langGroup.name}</TableCell>
-                  <TableCell align="right">{row.males||''}</TableCell>
-                  <TableCell align="right">{row.females||''}</TableCell>
+                  <TableCell align="right">{row.lang.name_ru}</TableCell>
+                  <TableCell align="right">
+                    {row.lang.langGroup.name_ru}
+                  </TableCell>
+                  <TableCell align="right">{row.males || ''}</TableCell>
+                  <TableCell align="right">{row.females || ''}</TableCell>
                   <TableCell align="right">
                     {Number(row.males) + Number(row.females) || ''}
                   </TableCell>
                   <TableCell align="right">
                     {row.males || row.females
-                      ? (((Number(row.males) + Number(row.females)) * 100) / total).toFixed(2)
+                      ? (
+                          ((Number(row.males) + Number(row.females)) * 100) /
+                          total
+                        ).toFixed(2)
                       : ''}
                   </TableCell>
                 </TableRow>

@@ -11,35 +11,41 @@ generator client {
 }
 
 model LangGroup {
-  id     Int      @id @default(autoincrement())
-  name   String   @unique
-  lang   Lang[]   @relation(name: "LangGroup")
-  census Census[] @relation(name: "CensLangGroup")
+  id      Int     @id @default(autoincrement())
+  name_ua String?
+  name_en String?
+  name_ru String?
+  lang    Lang[]  @relation(name: "LangGroup")
 }
 
 model Lang {
   id          Int       @id @default(autoincrement())
-  name        String    @unique
+  name_ua     String?
+  name_en     String?
+  name_ru     String?
   langGroup   LangGroup @relation(name: "LangGroup", fields: [langGroupId], references: [id])
   langGroupId Int
   census      Census[]  @relation(name: "CensLang")
 }
 
 model Region {
-  id       Int      @id @default(autoincrement())
-  parentId Int
-  name     String
-  census   Census[] @relation(name: "CensRegion")
+  id         Int      @id @default(autoincrement())
+  children   Region[] @relation("SubRegions")
+  parent     Region?  @relation("SubRegions", fields: [parentId], references: [id])
+  parentId   Int?
+  name_ua    String?
+  name_en    String?
+  name_ru    String?
+  europePart Int
+  census     Census[] @relation(name: "CensRegion")
 }
 
 model Census {
-  id          Int       @id @default(autoincrement())
-  males       Int?
-  females     Int?
-  langGroup   LangGroup @relation(name: "CensLangGroup", fields: [langGroupId], references: [id])
-  langGroupId Int
-  lang        Lang?     @relation(name: "CensLang", fields: [langId], references: [id])
-  langId      Int?
-  region      Region    @relation(name: "CensRegion", fields: [regionId], references: [id])
-  regionId    Int
+  id       Int    @id @default(autoincrement())
+  males    Int
+  females  Int
+  lang     Lang   @relation(name: "CensLang", fields: [langId], references: [id])
+  langId   Int
+  region   Region @relation(name: "CensRegion", fields: [regionId], references: [id])
+  regionId Int
 }
