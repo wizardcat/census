@@ -70,7 +70,7 @@ const CensusTable = () => {
                         {++idx}
                       </TableCell>
                       <TableCell align="right">
-                        {['Малоруський', 'Malorussky', 'Малорусский'].includes(
+                        {['Малоруська', 'Malorussian', 'Малорусский'].includes(
                           row.lang.name
                         ) ? (
                           <FormattedMessage id="langFix.ukrainian" />
