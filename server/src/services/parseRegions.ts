@@ -29,7 +29,7 @@ export const parseRegions = (cheerioAPI: cheerio.CheerioAPI, selectorRegions: st
         const region = {
             id: regionId,
             parentId: parentId,
-            name_ua: null,
+            name_uk: null,
             name_en: null,
             name_ru: regionNameRu,
             europePart: europePart

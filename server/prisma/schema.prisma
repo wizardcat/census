@@ -12,7 +12,7 @@ generator client {
 
 model LangGroup {
   id      Int     @id @default(autoincrement())
-  name_ua String?
+  name_uk String?
   name_en String?
   name_ru String?
   lang    Lang[]  @relation(name: "LangGroup")
@@ -20,7 +20,7 @@ model LangGroup {
 
 model Lang {
   id          Int       @id @default(autoincrement())
-  name_ua     String?
+  name_uk     String?
   name_en     String?
   name_ru     String?
   langGroup   LangGroup @relation(name: "LangGroup", fields: [langGroupId], references: [id])
@@ -33,7 +33,7 @@ model Region {
   children   Region[] @relation("SubRegions")
   parent     Region?  @relation("SubRegions", fields: [parentId], references: [id])
   parentId   Int?
-  name_ua    String?
+  name_uk    String?
   name_en    String?
   name_ru    String?
   europePart Int

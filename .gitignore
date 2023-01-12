@@ -1,0 +1,4 @@
+client/src/components/RegionsTable copy.tsx
+client/src/components/CensusTable copy.tsx
+server/prisma/dev copy.db
+server/prisma/total.sql

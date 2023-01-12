@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Prisma, PrismaClient } from '@prisma/client'
 import { CensusRecord } from '../types'
-
+import { parsePropNames } from './utils'
 const prisma = new PrismaClient()
 
 export const addCensuses = async (censuses: CensusRecord[]) => {
@@ -24,9 +24,9 @@ export const addCensuses = async (censuses: CensusRecord[]) => {
 
 export const getCensusById = async (req: Request, res: Response) => {
 
-    const { lang, id } = req.params
+    const { locale, regionId } = req.query
 
-    const census = await prisma.census.findMany({
+    const censusData = await prisma.census.findMany({
         orderBy: {
             lang: {
                 id: 'asc'
@@ -45,22 +45,16 @@ export const getCensusById = async (req: Request, res: Response) => {
             lang: {
                 select: {
                     id: true,
-                    name_ua: true,
-                    name_en: true,
-                    name_ru: true,
                     langGroupId: false,
-                    // name_ua: lang === 'ua',
-                    // name_en: lang === 'en',
-                    // name_ru: lang === 'ru',
+                    name_uk: locale === 'uk',
+                    name_en: locale === 'en',
+                    name_ru: locale === 'ru',
                     langGroup: {
                         select: {
                             id: true,
-                            name_ua: true,
-                            name_en: true,
-                            name_ru: true,
-                            // name_ua: lang === 'ua',
-                            // name_en: lang === 'en',
-                            // name_ru: lang === 'ru',
+                            name_uk: locale === 'uk',
+                            name_en: locale === 'en',
+                            name_ru: locale === 'ru',
                         }
 
                     }
@@ -71,11 +65,14 @@ export const getCensusById = async (req: Request, res: Response) => {
         },
 
         where: {
-            regionId: Number(id),
+            regionId: Number(regionId),
         }
     })
 
     try {
+
+        const census = parsePropNames(censusData)
+
         return res.status(200).json(census);
     } catch (error) {
         return res.status(500).json({ err: error })

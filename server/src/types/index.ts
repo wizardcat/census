@@ -1,7 +1,7 @@
 export type Region = {
     id: number,
     parentId?: number,
-    name_ua: string | null,
+    name_uk: string | null,
     name_en: string | null,
     name_ru: string | null,
     europePart: number
@@ -9,14 +9,14 @@ export type Region = {
 
 export type LanguageGroup = {
     id: number,
-    name_ua: string | null,
+    name_uk: string | null,
     name_en: string | null,
     name_ru: string | null
 }
 
 export type Language = {
     id: number,
-    name_ua: string | null,
+    name_uk: string | null,
     name_en: string | null,
     name_ru: string | null,
     langGroupId: number

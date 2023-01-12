@@ -38,7 +38,7 @@ export const parseCensusTable = (cheerioAPI: cheerio.CheerioAPI, selectorTable: 
 
                 langGroup = {
                     id: langGroupId,
-                    name_ua: null,
+                    name_uk: null,
                     name_en: null,
                     name_ru: langGroupNameRu
                 }
@@ -69,7 +69,7 @@ export const parseCensusTable = (cheerioAPI: cheerio.CheerioAPI, selectorTable: 
 
                 lang = {
                     id: langId,
-                    name_ua: null,
+                    name_uk: null,
                     name_en: null,
                     name_ru: langNameRu,
                     langGroupId: langGroupId

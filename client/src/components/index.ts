@@ -1,4 +1,5 @@
 import CensusTable from './CensusTable'
-import Regions from './Regions'
+import RegionsTable from './RegionsTable'
+import LocaleButton from './LocaleButton'
 
-export { CensusTable, Regions }
+export { CensusTable, RegionsTable, LocaleButton }

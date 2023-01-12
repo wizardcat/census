@@ -1,7 +1,9 @@
 {
   "name": "server",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "main": "index.js",
+  "description": "It's a server for the Census app",
+  "author": "Roman Havrylko",
   "license": "MIT",
   "scripts": {
     "server": "ts-node ./src/index.ts",

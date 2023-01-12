@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Prisma, PrismaClient } from '@prisma/client'
 import { Region } from '../types'
+import { parsePropNames } from './utils'
 
 const prisma = new PrismaClient()
 
@@ -25,27 +26,77 @@ export const addRegions = async (regions: Region[]) => {
 
 export const getRegions = async (req: Request, res: Response) => {
 
-    const { lang } = req.params
+    const { locale, lastId, skip, take, name } = req.query
 
-    const regions = await prisma.region.findMany({
-        orderBy: {
-            name_ru: 'asc',
-        },
+    const regionsData = await prisma.region.findMany({
+
+        take: Number(take) || 5,
+
         select: {
             id: true,
             parentId: false,
-            name_ua: true,
-            name_en: true,
-            name_ru: true,
-            // name_ua: lang === 'ua',
-            // name_en: lang === 'en',
-            // name_ru: lang === 'ru',
+            name_uk: locale === 'uk',
+            name_en: locale === 'en',
+            name_ru: locale === 'ru',
         },
-        where: { id: { in: [1, 2] } },
+
+        orderBy: {
+            id: 'asc',
+        },
+        where: {
+            id: { gt: Number(lastId) || 0 }
+        },
+
+
+    })
+
+    let queryCount = {}
+    if (locale === 'uk') {
+        queryCount = {
+            where: {
+                name_en: { contains: name as string },
+            },
+        }
+    } else if (locale === 'en') {
+        queryCount = {
+            where: {
+                name_en: { contains: name as string },
+            },
+        }
+    }
+    else if (locale === 'ru') {
+        queryCount = {
+            where: {
+                name_en: { contains: name as string },
+            },
+        }
+    }
+
+    const regionsCount = await prisma.region.count(queryCount)
+
+    const regions = parsePropNames(regionsData)
+
+    const regData = { regions, regionsCount }
+
+    try {
+        return res.status(200).json(regData);
+    } catch (error) {
+        return res.status(500).json({ err: error })
+    }
+}
+
+export const getRegionsCountByName = async (req: Request, res: Response) => {
+
+    const { name } = req.query
+
+    const regionsCount = await prisma.region.count({
+        where: {
+            name_en: { contains: name as string }
+        },
     })
 
     try {
-        return res.status(200).json(regions);
+        return res.status(200).json(regionsCount);
     } catch (error) {
         return res.status(500).json({ err: error })
     }

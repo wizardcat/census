@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
-import { Census } from './actionTypes'
+import { URL } from '../const';
+import { Census } from '../types'
 
 export interface InitialStateI {
     fetchedCensus: Census[],
@@ -10,12 +11,15 @@ const initialState: InitialStateI = {
     fetchedCensus: [],
 }
 
+type Params = { locale: string, regionId: number }
+
 export const getCensus = createAsyncThunk(
     'census/fetchCensus',
-    async (regionId: number, thunkAPI) => {
+    async (params: Params, thunkAPI) => {
         try {
-            let lang = 'ru'
-            const response = await axios.get(`http://localhost:3001/${lang}/census/${regionId}`);
+            const paramsList = Object.keys(params).map((key) => key + '=' + params[key as keyof Params]).join('&')
+            const response = await axios.get(`${URL}/census/?${paramsList}`);
+
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error);

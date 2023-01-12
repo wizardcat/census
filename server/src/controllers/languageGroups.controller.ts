@@ -10,12 +10,6 @@ export const addLanguageGroups = async (languageGroups: LanguageGroup[]) => {
         langGroups.map(async (langGroup) => {
             await prisma.langGroup.create({
                 data: langGroup,
-                // data: {
-                //     id: langGroup.id,
-                //     name_ua: langGroup.name_ua,
-                //     name_en: langGroup.name_en,
-                //     name_ru: langGroup.name_ru,
-                // }
             })
         })).then(async () => {
             await prisma.$disconnect()
