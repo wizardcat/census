@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
 import { QueryGetRegionsParams } from '../types'
 import { Region } from '../types'
 import { useAppSelector, useAppDispatch } from '../redux/hooks'
@@ -20,7 +21,7 @@ const RegionsTable = () => {
   const dispatch = useAppDispatch()
   const [page, setPage] = useState(0)
   const prevPage = useRef(0)
-  const [rowsPerPage, setRowsPerPage] = useState(15)
+  const [rowsPerPage, setRowsPerPage] = useState(5)
   const [lastIdList, setLastIdList] = useState([])
 
   const regs = useAppSelector(state => {
@@ -102,8 +103,10 @@ const RegionsTable = () => {
           >
             <TableHead>
               <TableRow>
-                <TableCell align="right">
-                  <FormattedMessage id="tableRegions.header.name" />
+                <TableCell align="left">
+                  <Typography variant="subtitle2">
+                    <FormattedMessage id="tableRegions.header.name" />
+                  </Typography>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -118,8 +121,14 @@ const RegionsTable = () => {
                     key={row.id}
                     selected={regionId === row.id}
                   >
-                    <TableCell component="th" scope="row" align="right">
-                      {row.name}
+                    <TableCell component="th" scope="row" align="left">
+                      {row.parentId === 0 ? (
+                        <Typography variant="button">{row.name}</Typography>
+                      ) : (
+                        <Typography sx={{ marginLeft: '10px' }} variant="body2">
+                          {row.name}
+                        </Typography>
+                      )}
                     </TableCell>
                   </TableRow>
                 )

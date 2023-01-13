@@ -34,7 +34,7 @@ export const getRegions = async (req: Request, res: Response) => {
 
         select: {
             id: true,
-            parentId: false,
+            parentId: true,
             name_uk: locale === 'uk',
             name_en: locale === 'en',
             name_ru: locale === 'ru',

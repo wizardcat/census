@@ -27,6 +27,7 @@ export type Region =
     {
         id: number,
         name: string,
+        parentId: number
     }
 
 export type Regions = { regions: Region[], regionsCount: number }

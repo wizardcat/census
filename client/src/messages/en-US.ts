@@ -27,7 +27,7 @@ export default {
     search: 'Search',
     //In Russian Empire east slavic languages counted as a russian dialect. Switch it to the reality.
     langFix: {
-      eastSlavicGroup: 'East Slavic languages',
+      eastSlavicGroup: 'East Slavic languages*',
       ukrainian: 'Ukrainian (Malorussian*)',
       russian: 'Russian',
       belarussian: 'Belarussian',

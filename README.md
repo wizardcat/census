@@ -12,3 +12,6 @@ At the moment, a scrubber is implemented which extracts data from a single resou
 The census data is imported.
 The minimal site functionality and design are realized.
 Localization (Ukrainian, English, Russian) is realized.
+
+13.01.23
+Some bugfixes and improvements.
