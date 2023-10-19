@@ -16,7 +16,7 @@ export function CensusTableHeader() {
       <TableRow>
         {messageIds.map((mesId) => {
           return (
-            <TableCell align="right" sortDirection={sortBy === mesId ? sortOrder : false}>
+            <TableCell key={mesId} align="right" sortDirection={sortBy === mesId ? sortOrder : false}>
               <TableSortLabel
                 active={sortBy === mesId}
                 direction={sortBy === mesId ? sortOrder : 'asc'}
