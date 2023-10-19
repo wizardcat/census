@@ -1,7 +1,8 @@
 import { Router } from 'express';
-import { getCensusById } from '../controllers/census.controller';
+import { getCensusByRegionId } from '../controllers/census.controller';
 const router: Router = Router();
 
-router.get('/', getCensusById);
+router.get('/', getCensusByRegionId);
+// router.get('/by-name/', getCensusByRegionName);
 
 export default router;

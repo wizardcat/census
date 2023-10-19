@@ -5,76 +5,142 @@ import { parsePropNames } from './utils'
 const prisma = new PrismaClient()
 
 export const addCensuses = async (censuses: CensusRecord[]) => {
-    let censusesData: Prisma.CensusUncheckedCreateInput[] = censuses
+  let censusesData: Prisma.CensusUncheckedCreateInput[] = censuses
 
-    await Promise.all(
-        censusesData.map(async (census) => {
-            await prisma.census.create({
-                data: census,
-            })
-        })).then(async () => {
-            await prisma.$disconnect()
-        })
-        .catch(async (e) => {
-            console.error(e)
-            await prisma.$disconnect()
-            process.exit(1)
-        })
+  await Promise.all(
+    censusesData.map(async (census) => {
+      await prisma.census.create({
+        data: census,
+      })
+    })).then(async () => {
+      await prisma.$disconnect()
+    })
+    .catch(async (e) => {
+      console.error(e)
+      await prisma.$disconnect()
+      process.exit(1)
+    })
 }
 
-export const getCensusById = async (req: Request, res: Response) => {
+export const getCensusByRegionId = async (req: Request, res: Response) => {
 
-    const { locale, regionId } = req.query
+  const { locale, regionId } = req.query
 
-    const censusData = await prisma.census.findMany({
-        orderBy: {
-            lang: {
-                id: 'asc'
-                // langGroup: {
-                //     name_ru: 'asc',
-                // },
-                // name_ru: 'asc',
-            },
-        },
+  const nameByLocale = `name_${locale}`;
+
+  const censusData = await prisma.census.findMany({
+    orderBy: {
+      lang: {
+        id: 'asc'
+        // langGroup: {
+        //     [nameByLocale]: 'asc',
+        // },
+        // [nameByLocale]: 'asc',
+      },
+    },
+    select: {
+
+      id: true,
+      males: true,
+      females: true,
+
+      lang: {
         select: {
+          id: true,
+          langGroupId: false,
+          [nameByLocale]: true,
+          langGroup: {
+            select: {
+              id: true,
+              [nameByLocale]: true,
+            }
 
-            id: true,
-            males: true,
-            females: true,
-
-            lang: {
-                select: {
-                    id: true,
-                    langGroupId: false,
-                    name_uk: locale === 'uk',
-                    name_en: locale === 'en',
-                    name_ru: locale === 'ru',
-                    langGroup: {
-                        select: {
-                            id: true,
-                            name_uk: locale === 'uk',
-                            name_en: locale === 'en',
-                            name_ru: locale === 'ru',
-                        }
-
-                    }
-                }
-
-            },
-
-        },
-
-        where: {
-            regionId: Number(regionId),
+          }
         }
-    })
 
-    try {
+      },
 
-        const census = parsePropNames(censusData)
+    },
 
-        return res.status(200).json(census);
-    } catch (error) {
-        return res.status(500).json({ err: error })
+    where: {
+      regionId: Number(regionId),
     }
+  })
+
+  try {
+
+    const census = parsePropNames(censusData)
+
+    return res.status(200).json(census);
+  } catch (error) {
+    return res.status(500).json({ err: error })
+  }
+}
+
+export const getCensusByRegionName = async (req: Request, res: Response) => {
+
+  const { locale, region } = req.query
+
+  const nameByLocale = `name_${locale}`;
+
+  const regionIdResp = await prisma.region.findFirst({
+    where: {
+      [nameByLocale]: { contains: region as string }
+      // [nameByLocale]: region
+    },
+  });
+
+  const regionId = regionIdResp?.id;
+console.log(JSON.stringify(regionIdResp));
+
+  if (!regionId) return;
+
+  // console.log('regionId: ' + regionId);
+  const censusData = await prisma.census.findMany({
+    orderBy: {
+      lang: {
+        id: 'asc'
+        // langGroup: {
+        //     [nameByLocale]: 'asc',
+        // },
+        // [nameByLocale]: 'asc',
+      },
+    },
+    select: {
+
+      id: true,
+      males: true,
+      females: true,
+
+      lang: {
+        select: {
+          id: true,
+          langGroupId: false,
+          [nameByLocale]: true,
+          langGroup: {
+            select: {
+              id: true,
+              [nameByLocale]: true,
+            }
+
+          }
+        }
+
+      },
+
+    },
+    where: {
+      // [nameByLocale]: region,
+      regionId: Number(regionId),
+    }
+  })
+
+  try {
+
+    const census = parsePropNames(censusData)
+    // console.log('census: ' + JSON.stringify(census).length);
+    return res.status(200).json(census);
+  } catch (error) {
+    return res.status(500).json({ err: error })
+  }
 }

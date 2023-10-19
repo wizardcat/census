@@ -1,8 +1,9 @@
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import { FormattedMessage } from 'react-intl'
-import { CensusTable, RegionsTable, LocaleButton } from '../../components'
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { FormattedMessage } from 'react-intl';
+import { CensusTable, RegionsTable, LocaleButton } from '../../components';
+import RegionFilter from '../../components/RegionFilter/RegionFilter';
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} md={3} sx={{ width: '300px' }}>
+          <RegionFilter />
           <RegionsTable />
         </Grid>
         <Grid item xs={12} md={9}>
@@ -22,7 +24,7 @@ const Home = () => {
         </Grid>
       </Grid>
     </Box>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
