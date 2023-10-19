@@ -17,9 +17,9 @@ const CensusTable = () => {
     <Grid container spacing={2}>
       <Grid item>
         <Box sx={{ width: '100%' }}>
-          <Paper sx={{ width: '100%', mb: 2 }}>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 450 }} stickyHeader aria-label="census table">
+          <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
+            <TableContainer sx={{ maxHeight: '79vh' }} component={Paper}>
+              <Table stickyHeader size="small" aria-label="census table">
                 <CensusTableHeader />
                 <TableBody>
                   {rows.map((row, idx: number) => (

@@ -31,15 +31,16 @@ const RegionsTable = () => {
     // <Box sx={{ position: 'sticky', top: '169px' }}>
     //, margin: '0 auto 0 auto'
     // {/* component={Paper} */}
-    <Grid sx={{ position: 'sticky', top: '153px' }} container>
+    // sx={{ position: 'sticky', top: '153px' }}
+    <Grid container>
       <Grid item sx={{ width: '100%' }}>
         <Box>
           <Paper sx={{ mb: 2 }}>
             <TableContainer>
               <Table
-                sx={{ width: '90%', margin: '0 auto 0 auto', minWidth: 260 }}
-                stickyHeader
+                sx={{ width: '90%', margin: '0 auto 0 auto', minWidth: 260, height: 430 }}
                 aria-labelledby="tableTitle"
+                size="small"
               >
                 <TableHead>
                   <TableRow>
@@ -83,7 +84,7 @@ const RegionsTable = () => {
                 },
               }}
               labelRowsPerPage={<FormattedMessage id="tableRegions.labelRowsPerPage" />}
-              rowsPerPageOptions={[5, 15, 30]}
+              rowsPerPageOptions={[10, 15, 20]}
               component="div"
               count={regs.regionsCount}
               rowsPerPage={rowsPerPage}

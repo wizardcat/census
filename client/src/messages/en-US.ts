@@ -32,5 +32,6 @@ export default {
       russian: 'Russian',
       belarussian: 'Belarussian',
     },
+    regionFilterPlaceholder: 'Type the region name',
   },
 }

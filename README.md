@@ -1,9 +1,12 @@
-# The 0.0.5 version.
+# The 0.0.8 version.
 
-The purpose of this project is to present in a convenient form some results of the first general census conducted in the Russian Empire in 1897.
-It will present the distribution of the population by native language in the provinces of the empire. I find this information very interesting, especially in light of the myth spread by Russia about the non-existent Ukrainian language. :)
+ I find the information presented by this app exciting in light of the myth spread by Russia about the non-existent Ukrainian language.
+It shows in convenient form the distribution of the population by native language in the provinces of the Russian Empire. It is data from the first general census conducted in the Russian Empire in 1897.
+ This info could be interesting for other nations, that populate Russia too.
 
 Changes:
+19.10.23
+Added filter by region.
 
 02.01.23
 At the moment, a scrubber is implemented which extracts data from a single resource containing the desired information and the embryo of the page.

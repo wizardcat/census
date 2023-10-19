@@ -9,7 +9,7 @@ export const useRegionsTable = () => {
   const dispatch = useAppDispatch()
   const [page, setPage] = useState(0)
   const prevPage = useRef(0)
-  const [rowsPerPage, setRowsPerPage] = useState(5)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   const [lastIdList, setLastIdList] = useState([])
 
   const regs = useAppSelector(state => {

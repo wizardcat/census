@@ -15,7 +15,7 @@ const Home = () => {
             <FormattedMessage id="header" />
           </Typography>
         </Grid>
-        <Grid item xs={12} md={3} sx={{ width: '300px' }}>
+        <Grid item xs={12} md={3} sx={{ width: '300px', position: 'sticky', top: 0 }}>
           <RegionFilter />
           <RegionsTable />
         </Grid>
