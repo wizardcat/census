@@ -55,7 +55,7 @@ export const parseCensusTable = (cheerioAPI: cheerio.CheerioAPI, selectorTable: 
             arrIdxShift = 0
         }
 
-        //Extract languages during a first pass
+        //Extract languages during the first pass
         langNameRu = $(tableRow[arrIdxShift + 0]).text().trim()
 
         if (langNameRu !== 'Итого') {

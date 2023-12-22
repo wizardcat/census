@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import Paper from '@mui/material/Paper';
@@ -7,7 +6,7 @@ import { useRegionFilter } from './useRegionFilter';
 
 // const ariaLabel = { 'aria-label': 'description' };
 
-const RegionFilter: FC = () => {
+const RegionFilter = () => {
   const { handleChange, placeholderText } = useRegionFilter();
 
   return (

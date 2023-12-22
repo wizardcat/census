@@ -1,21 +1,29 @@
 import { useAppSelector } from '../../redux/hooks';
-import { Censuses } from '../../types';
+import { Census, CensusData } from '../../types';
 
 export const useCensusTable = () => {
-
-  const calcTotal = (rows: Censuses) => {
-    return rows.reduce((prev, cur) => {
+  const calcTotal = (censusData: CensusData) => {
+    return censusData.reduce((prev, cur) => {
       return Number(prev) + Number(cur.males) + Number(cur.females);
     }, 0);
   };
 
-  const rows = useAppSelector((state) => {
+  const censusData = useAppSelector((state) => {
     return state.census.fetchedCensus;
   });
 
-  const total = calcTotal(rows);
+  const total = calcTotal(censusData);
+
+  const getPercentOfTotal = (peopleCount: Pick<Census, 'males' | 'females'>): string | null => {
+    const percent =
+      peopleCount.males || peopleCount.females
+        ? (((Number(peopleCount.males) + Number(peopleCount.females)) * 100) / total).toFixed(3)
+        : null;
+    return percent;
+  };
 
   return {
-    total, rows
-  }
-}
+    getPercentOfTotal,
+    censusData,
+  };
+};

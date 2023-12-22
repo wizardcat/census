@@ -1,6 +1,6 @@
-import { MouseEvent } from 'react';
 import Box from '@mui/material/Box';
-import { FormattedMessage } from 'react-intl';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,9 +8,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import { MouseEvent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Region } from '../../types';
 import { useRegionsTable } from './useRegionsTable';
 
@@ -24,6 +24,10 @@ const RegionsTable = () => {
     handleChangePage,
     handleChangeRowsPerPage,
   } = useRegionsTable();
+
+  // if (isLoading) return 'Loading...';
+
+  // if (error) return 'An error has occurred: ' + error.message;
 
   return (
     // <Box sx={{ width: '100%', position: 'sticky', top: '169px' }}>
@@ -52,22 +56,22 @@ const RegionsTable = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {regs.regions.map((row: Region, idx: number) => {
+                  {regs.regions.map((region: Region, idx: number) => {
                     return (
                       <TableRow
                         hover
                         onClick={(event: MouseEvent<HTMLElement>) =>
-                          handleListItemClick(event, row.id)
+                          handleListItemClick(event, region.id)
                         }
-                        key={row.id}
-                        selected={regionId === row.id}
+                        key={region.id}
+                        selected={regionId === region.id}
                       >
                         <TableCell component="th" scope="row" align="left">
-                          {row.parentId === 0 ? (
-                            <Typography variant="button">{row.name}</Typography>
+                          {region.parentId === 0 ? (
+                            <Typography variant="button">{region.name}</Typography>
                           ) : (
                             <Typography sx={{ marginLeft: '10px' }} variant="body2">
-                              {row.name}
+                              {region.name}
                             </Typography>
                           )}
                         </TableCell>

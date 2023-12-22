@@ -1,30 +1,32 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from "axios";
-import { URL } from '../const';
-import { Census } from '../types'
+import axios from 'axios';
+import { URL } from '../constants';
+import { Census } from '../types';
 
-export interface InitialStateI {
-  fetchedCensus: Census[],
+export interface InitialState {
+  fetchedCensus: Census[];
 }
 
-const initialState: InitialStateI = {
+const initialState: InitialState = {
   fetchedCensus: [],
-}
+};
 
-type Params = { locale: string, regionId: number }
+type Params = { locale: string; regionId: number };
 
 export const getCensusByRegionId = createAsyncThunk(
   'census/fetchCensus',
   async (params: Params, thunkAPI) => {
     try {
-      const paramsList = Object.keys(params).map((key) => key + '=' + params[key as keyof Params]).join('&')
+      const paramsList = Object.keys(params)
+        .map((key) => key + '=' + params[key as keyof Params])
+        .join('&');
       const response = await axios.get(`${URL}/census/?${paramsList}`);
 
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
 // type CensusByRegionNameParams = { locale: string, region: string }
@@ -47,16 +49,14 @@ export const getCensusByRegionId = createAsyncThunk(
 export const censusSlice = createSlice({
   name: 'census',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(getCensusByRegionId.fulfilled, (state, action) => {
-        state.fetchedCensus = action.payload;
-      })
-      // .addCase(getCensusByRegionName.fulfilled, (state, action) => {
-      //   state.fetchedCensus = action.payload;
-      // });
+    builder.addCase(getCensusByRegionId.fulfilled, (state, action) => {
+      state.fetchedCensus = action.payload;
+    });
+    // .addCase(getCensusByRegionName.fulfilled, (state, action) => {
+    //   state.fetchedCensus = action.payload;
+    // });
   },
 });
 
