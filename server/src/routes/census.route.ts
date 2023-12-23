@@ -6,3 +6,4 @@ router.get('/', getCensusByRegionId);
 // router.get('/by-name/', getCensusByRegionName);
 
 export default router;
+

@@ -1,5 +1,6 @@
-import regionsRoute from './regionsRoute'
-import censusRoute from './censusRoute'
-import importData from './importData'
+import censusRoute from './census.route';
+import importData from './import-data.route';
+import regionsRoute from './regions.route';
 
-export { regionsRoute, censusRoute, importData }
+export { censusRoute, importData, regionsRoute };
+

@@ -6,12 +6,12 @@ import { parsePropNames } from './utils';
 const prisma = new PrismaClient();
 
 export const addRegions = async (regions: Region[]) => {
-  let regs: Prisma.RegionCreateInput[] = regions;
+  const regionsData: Prisma.RegionCreateInput[] = regions;
 
   await Promise.all(
-    regs.map(async (reg) => {
+    regionsData.map(async (region) => {
       await prisma.region.create({
-        data: reg,
+        data: region,
       });
     }),
   )
@@ -99,13 +99,13 @@ export const getRegionIdByName = async (req: Request, res: Response) => {
   }
 };
 
-export const getMaxRegionsId = async () => {
-  const maxRegionsId = await prisma.region.aggregate({
+export const getMaxRegionId = async () => {
+  const maxRegionId = await prisma.region.aggregate({
     _max: {
       id: true,
     },
   });
-  return maxRegionsId._max.id || 0;
+  return maxRegionId._max.id || 0;
 };
 
 export const getRegionsByName = async (req: Request, res: Response) => {
@@ -144,5 +144,3 @@ export const getRegionsByName = async (req: Request, res: Response) => {
 //   return res.status(500).json({ err: error })
 // }
 // }
-
-export const getRegionById = async (req: Request, res: Response) => {};

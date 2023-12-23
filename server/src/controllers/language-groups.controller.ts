@@ -1,15 +1,15 @@
 import { Prisma, PrismaClient } from '@prisma/client';
-import { Language } from '../types';
+import { LanguageGroup } from '../types';
 
 const prisma = new PrismaClient();
 
-export const addLanguages = async (languages: Language[]) => {
-  let lang: Prisma.LangUncheckedCreateInput[] = languages;
+export const addLanguageGroups = async (languageGroups: LanguageGroup[]) => {
+  let langGroups: Prisma.LangGroupCreateInput[] = languageGroups;
 
   await Promise.all(
-    lang.map(async (lng) => {
-      await prisma.lang.create({
-        data: lng,
+    langGroups.map(async (langGroup) => {
+      await prisma.langGroup.create({
+        data: langGroup,
       });
     }),
   )
