@@ -14,8 +14,6 @@ export const parseRegions = async (parseRegionsParams: ParseRegionsParams): Prom
   const regionsList: Region[] = [];
   let parentId = 0;
   let regionId = await getMaxRegionId();
-  console.log('selectorRegions: ' + selectorRegions);
-  console.log('length: ' + $(selectorRegions).length);
 
   $(selectorRegions).each((parentIndex, parentElem) => {
     const regionName = $(parentElem).text();

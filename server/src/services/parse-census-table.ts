@@ -17,11 +17,11 @@ export const parseCensusTable = (
     parseCensusTableParams;
 
   const $ = page;
-  let languageGroupId = 0;
-  let languageId = 0;
   const censusByReg: CensusRecord[] = [];
   const languages: Language[] = [];
   const langGroups: LanguageGroup[] = [];
+  let languageGroupId = 0;
+  let languageId = 0;
   let lastLangGroupName = '';
 
   $(selectorTable).each((parentIndex, parentElem) => {
@@ -31,8 +31,6 @@ export const parseCensusTable = (
 
     if (firstCellValue.toLowerCase() === 'итого') return;
 
-    let lang: Language;
-    let censusRecord: CensusRecord;
     const hasLanguageGroup =
       (dataSourceConfigName !== 'byOblastsOfEmpire' &&
         ((tableRow.length === 5 && tableRow.last()[0].type !== 'text') ||
@@ -72,7 +70,7 @@ export const parseCensusTable = (
 
     //Create languages array during the first pass
     if (isFirstRegion) {
-      lang = {
+      const lang = {
         id: languageId,
         name_uk: null,
         name_en: null,
@@ -98,7 +96,7 @@ export const parseCensusTable = (
           ?.join(''),
       ) || 0;
 
-    censusRecord = {
+    const censusRecord: CensusRecord = {
       males: males,
       females: females,
       langId: languageId,
