@@ -4,7 +4,7 @@ export type Region = {
   name_uk: string | null;
   name_en: string | null;
   name_ru: string | null;
-  europePart: number;
+  censusDocumentId: number;
 };
 
 export type LanguageGroup = {

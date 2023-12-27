@@ -24,7 +24,9 @@ export const grabCensusData = async (dataSourceConfigName: keyof typeof DATA_SOU
   });
   isFirstRegion = false;
 
-  return { regions, ...data };
+  // return { regions, ...data };
+  // return { data: data?.censusPageData.censusByReg };
+  return { langGroups: data?.censusPageData.langGroups, languages: data?.censusPageData.languages };
   //   regionListId++;
   // } while (regionListId === regions.length - 1);
 };

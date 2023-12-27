@@ -8,8 +8,8 @@ export const DATA_SOURCE_CONFIG = {
       'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(3) > tbody > tr > td > form > div > select > option:not(:first-of-type)',
     selectorTable:
       'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(5) > tbody > tr:nth-child(n+3)',
-    europePart: 1,
-    description: `The First General Census of the Russian Empire of 1897.
+    censusDocumentId: 1,
+    censusDocumentName: `The First General Census of the Russian Empire of 1897.
                 Breakdown of population by mother tongue and districts* in 50 Governorates of the European Russia`,
     header_ru: `Первая всеобщая перепись населения Российской Империи 1897 г.
                 Распределение населения по родному языку и уездам 50 губерний Европейской России`,
@@ -27,8 +27,8 @@ export const DATA_SOURCE_CONFIG = {
       'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(2) > tbody > tr > td > form > div > select > option:not(:first-of-type)',
     selectorTable:
       'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(4) > tbody > tr:nth-child(n+3)',
-    europePart: 0,
-    description: `The first general census of the population of the Russian Empire in 1897
+    censusDocumentId: 0,
+    censusDocumentName: `The first general census of the population of the Russian Empire in 1897
                   Population distribution by mother tongue and counties
                   Russian Empire except for the provinces of European Russia`,
 
@@ -50,8 +50,8 @@ export const DATA_SOURCE_CONFIG = {
       'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(2) > tbody > tr > td > form > div > select > option:not(:first-of-type)',
     selectorTable:
       'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(4) > tbody > tr:nth-child(n+2)',
-    europePart: 3,
-    description: `The first general census of the population of the Russian Empire in 1897
+    censusDocumentId: 3,
+    censusDocumentName: `The first general census of the population of the Russian Empire in 1897
                   Distribution of the population by native language, provinces and regions`,
 
     header_ru: `Первая всеобщая перепись населения Российской Империи 1897 г.

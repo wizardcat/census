@@ -18,6 +18,7 @@ export const processCensusByRegion = async (
   const censusPageData = parseCensusTable({
     page,
     selectorTable,
+    dataSourceConfigName,
     regionId,
     isFirstRegion,
   });
