@@ -10,42 +10,61 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model LangGroup {
-  id      Int     @id @default(autoincrement())
-  name_uk String?
-  name_en String?
-  name_ru String?
-  lang    Lang[]  @relation(name: "LangGroup")
+model Document {
+  id     Int      @id @default(autoincrement())
+  nameUK String?  @map("name_uk")
+  nameEN String?  @map("name_en")
+  nameRU String   @map("name_ru")
+  region Region[] @relation(name: "Document")
+
+  @@map("document")
 }
 
-model Lang {
-  id          Int       @id @default(autoincrement())
-  name_uk     String?
-  name_en     String?
-  name_ru     String?
-  langGroup   LangGroup @relation(name: "LangGroup", fields: [langGroupId], references: [id])
-  langGroupId Int
-  census      Census[]  @relation(name: "CensLang")
+model LanguageGroup {
+  id       Int        @id @default(autoincrement())
+  nameUK   String?    @map("name_uk")
+  nameEN   String?    @map("name_en")
+  nameRU   String     @map("name_ru")
+  language Language[] @relation(name: "LanguageGroup")
+
+  @@map("language_group")
+}
+
+model Language {
+  id              Int           @id @default(autoincrement())
+  nameUK          String?       @map("name_uk")
+  nameEN          String?       @map("name_en")
+  nameRU          String        @map("name_ru")
+  languageGroup   LanguageGroup @relation(name: "LanguageGroup", fields: [languageGroupId], references: [id])
+  languageGroupId Int           @map("language_group_id")
+  census          Census[]      @relation(name: "CensusLanguage")
+
+  @@map("language")
 }
 
 model Region {
   id         Int      @id @default(autoincrement())
-  children   Region[] @relation("SubRegions")
-  parent     Region?  @relation("SubRegions", fields: [parentId], references: [id])
-  parentId   Int?
-  name_uk    String?
-  name_en    String?
-  name_ru    String?
-  europePart Int
+  // children   Region[] @relation("SubRegions")
+  // parent     Region?  @relation("SubRegions", fields: [parentId], references: [id])
+  parentId   Int?     @map("parent_id")
+  nameUK     String?  @map("name_uk")
+  nameEN     String?  @map("name_en")
+  nameRU     String   @map("name_ru")
   census     Census[] @relation(name: "CensRegion")
+  document   Document @relation(name: "Document", fields: [documentId], references: [id])
+  documentId Int      @map("document_id")
+
+  @@map("region")
 }
 
 model Census {
-  id       Int    @id @default(autoincrement())
-  males    Int
-  females  Int
-  lang     Lang   @relation(name: "CensLang", fields: [langId], references: [id])
-  langId   Int
-  region   Region @relation(name: "CensRegion", fields: [regionId], references: [id])
-  regionId Int
+  id         Int      @id @default(autoincrement())
+  males      Int
+  females    Int
+  language   Language @relation(name: "CensusLanguage", fields: [languageId], references: [id])
+  languageId Int      @map("language_id")
+  region     Region   @relation(name: "CensRegion", fields: [regionId], references: [id])
+  regionId   Int      @map("region_id")
+
+  @@map("census")
 }

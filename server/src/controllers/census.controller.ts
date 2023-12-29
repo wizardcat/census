@@ -1,14 +1,14 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { CensusRecord } from '../types';
-import { parsePropNames } from './utils';
+import { getNameByLocale, parsePropNames } from './utils';
 const prisma = new PrismaClient();
 
-export const addCensuses = async (censuses: CensusRecord[]) => {
-  let censusesData: Prisma.CensusUncheckedCreateInput[] = censuses;
+export const addCensuses = async (census: CensusRecord[]) => {
+  let censusData: Prisma.CensusUncheckedCreateInput[] = census;
 
   await Promise.all(
-    censusesData.map(async (census) => {
+    censusData.map(async (census) => {
       await prisma.census.create({
         data: census,
       });
@@ -27,11 +27,11 @@ export const addCensuses = async (censuses: CensusRecord[]) => {
 export const getCensusByRegionId = async (req: Request, res: Response) => {
   const { locale, regionId } = req.query;
 
-  const nameByLocale = `name_${locale}`;
+  const nameByLocale = getNameByLocale(locale as string);
 
   const censusData = await prisma.census.findMany({
     orderBy: {
-      lang: {
+      language: {
         id: 'asc',
         // langGroup: {
         //     [nameByLocale]: 'asc',
@@ -44,12 +44,12 @@ export const getCensusByRegionId = async (req: Request, res: Response) => {
       males: true,
       females: true,
 
-      lang: {
+      language: {
         select: {
           id: true,
-          langGroupId: false,
+          languageGroupId: false,
           [nameByLocale]: true,
-          langGroup: {
+          languageGroup: {
             select: {
               id: true,
               [nameByLocale]: true,
@@ -76,7 +76,7 @@ export const getCensusByRegionId = async (req: Request, res: Response) => {
 export const getCensusByRegionName = async (req: Request, res: Response) => {
   const { locale, region } = req.query;
 
-  const nameByLocale = `name_${locale}`;
+  const nameByLocale = getNameByLocale(locale as string);
 
   const regionIdResp = await prisma.region.findFirst({
     where: {
@@ -86,14 +86,13 @@ export const getCensusByRegionName = async (req: Request, res: Response) => {
   });
 
   const regionId = regionIdResp?.id;
-  console.log(JSON.stringify(regionIdResp));
 
   if (!regionId) return;
 
   // console.log('regionId: ' + regionId);
   const censusData = await prisma.census.findMany({
     orderBy: {
-      lang: {
+      language: {
         id: 'asc',
         // langGroup: {
         //     [nameByLocale]: 'asc',
@@ -106,12 +105,12 @@ export const getCensusByRegionName = async (req: Request, res: Response) => {
       males: true,
       females: true,
 
-      lang: {
+      language: {
         select: {
           id: true,
-          langGroupId: false,
+          languageGroupId: false,
           [nameByLocale]: true,
-          langGroup: {
+          languageGroup: {
             select: {
               id: true,
               [nameByLocale]: true,

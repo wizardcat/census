@@ -2,8 +2,8 @@ import axios from 'axios';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
 import { getCensusByRegionId } from '../../redux/censusSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { QueryGetRegionsParams } from '../../types';
 import { getRegions } from '../../redux/regionsSlice';
+import { QueryGetRegionsParams } from '../../types';
 
 export const useRegionsTable = () => {
   const [regionId, setRegionId] = useState(0);

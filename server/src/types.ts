@@ -1,37 +1,37 @@
 export type Region = {
   id: number;
   parentId: number;
-  name_uk: string | null;
-  name_en: string | null;
-  name_ru: string | null;
-  censusDocumentId: number;
+  nameUK: string | null;
+  nameEN: string | null;
+  nameRU: string;
+  documentId: number;
 };
 
 export type LanguageGroup = {
   id: number;
-  name_uk: string | null;
-  name_en: string | null;
-  name_ru: string | null;
+  nameUK: string | null;
+  nameEN: string | null;
+  nameRU: string;
 };
 
 export type Language = {
   id: number;
-  name_uk: string | null;
-  name_en: string | null;
-  name_ru: string | null;
-  langGroupId: number;
+  nameUK: string | null;
+  nameEN: string | null;
+  nameRU: string;
+  languageGroupId: number;
 };
 
 export type CensusRecord = {
   id?: number;
   males: number;
   females: number;
-  langId: number;
+  languageId: number;
   regionId: number;
 };
 
 export type CensusPageData = {
   censusByReg: CensusRecord[];
-  langGroups: LanguageGroup[];
+  languageGroups: LanguageGroup[];
   languages: Language[];
 };

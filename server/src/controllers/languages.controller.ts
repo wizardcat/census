@@ -4,12 +4,12 @@ import { Language } from '../types';
 const prisma = new PrismaClient();
 
 export const addLanguages = async (languages: Language[]) => {
-  let lang: Prisma.LangUncheckedCreateInput[] = languages;
+  let lang: Prisma.LanguageUncheckedCreateInput[] = languages;
 
   await Promise.all(
-    lang.map(async (lng) => {
-      await prisma.lang.create({
-        data: lng,
+    lang.map(async (language) => {
+      await prisma.language.create({
+        data: language,
       });
     }),
   )

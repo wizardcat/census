@@ -5,11 +5,11 @@ import { Region } from '../types';
 type ParseRegionsParams = {
   page: cheerio.CheerioAPI;
   selectorRegions: string;
-  censusDocumentId: number;
+  documentId: number;
 };
 
 export const parseRegions = async (parseRegionsParams: ParseRegionsParams): Promise<Region[]> => {
-  const { page, selectorRegions, censusDocumentId } = parseRegionsParams;
+  const { page, selectorRegions, documentId } = parseRegionsParams;
   const $ = page;
   const regionsList: Region[] = [];
   let parentId = 0;
@@ -35,10 +35,10 @@ export const parseRegions = async (parseRegionsParams: ParseRegionsParams): Prom
     const region = {
       id: regionId,
       parentId: isParent ? 0 : parentId,
-      name_uk: null,
-      name_en: null,
-      name_ru: regionNameRu,
-      censusDocumentId,
+      nameUK: null,
+      nameEN: null,
+      nameRU: regionNameRu,
+      documentId,
     };
 
     regionsList.push(region);

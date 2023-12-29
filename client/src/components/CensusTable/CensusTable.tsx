@@ -23,9 +23,9 @@ const CensusTable = () => {
               <Table stickyHeader size="small" aria-label="census table">
                 <CensusTableHeader />
                 <TableBody>
-                  {censusData.map((dataByLanguage, idx: number) => (
+                  {censusData.map((censusRecord, idx: number) => (
                     <TableRow
-                      key={dataByLanguage.lang.id}
+                      key={censusRecord.language.id}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                       hover
                     >
@@ -34,28 +34,28 @@ const CensusTable = () => {
                       </TableCell>
                       <TableCell align="right">
                         {LANGUAGES_FOR_FIX.ukrainian.wordForms.includes(
-                          dataByLanguage.lang.name,
+                          censusRecord.language.name,
                         ) ? (
                           <FormattedMessage id={LANGUAGES_FOR_FIX.ukrainian.intlId} />
                         ) : (
-                          dataByLanguage.lang.name
+                          censusRecord.language.name
                         )}
                       </TableCell>
                       <TableCell align="right">
                         {LANGUAGES_FOR_FIX.russian.wordForms.includes(
-                          dataByLanguage.lang.langGroup.name,
+                          censusRecord.language.languageGroup.name,
                         ) ? (
                           <FormattedMessage id={LANGUAGES_FOR_FIX.russian.intlId} />
                         ) : (
-                          dataByLanguage.lang.langGroup.name
+                          censusRecord.language.languageGroup.name
                         )}
                       </TableCell>
-                      <TableCell align="right">{dataByLanguage.males || ''}</TableCell>
-                      <TableCell align="right">{dataByLanguage.females || ''}</TableCell>
+                      <TableCell align="right">{censusRecord.males || ''}</TableCell>
+                      <TableCell align="right">{censusRecord.females || ''}</TableCell>
                       <TableCell align="right">
-                        {Number(dataByLanguage.males) + Number(dataByLanguage.females) || ''}
+                        {Number(censusRecord.males) + Number(censusRecord.females) || ''}
                       </TableCell>
-                      <TableCell align="right">{getPercentOfTotal(dataByLanguage)}</TableCell>
+                      <TableCell align="right">{getPercentOfTotal(censusRecord)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

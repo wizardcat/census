@@ -19,7 +19,7 @@ export const parseCensusTable = (
   const $ = page;
   const censusByReg: CensusRecord[] = [];
   const languages: Language[] = [];
-  const langGroups: LanguageGroup[] = [];
+  const languageGroups: LanguageGroup[] = [];
   let languageGroupId = 0;
   let languageId = 0;
   let lastLangGroupName = '';
@@ -45,13 +45,13 @@ export const parseCensusTable = (
       languageGroupId++;
       const langGroup: LanguageGroup = {
         id: languageGroupId,
-        name_uk: null,
-        name_en: null,
-        name_ru: firstCellValue,
+        nameUK: null,
+        nameEN: null,
+        nameRU: firstCellValue,
       };
 
       lastLangGroupName = firstCellValue;
-      langGroups.push(langGroup);
+      languageGroups.push(langGroup);
     }
 
     const langCellValue = $(tableRow[tableRow.length - 4])
@@ -72,10 +72,10 @@ export const parseCensusTable = (
     if (isFirstRegion) {
       const lang = {
         id: languageId,
-        name_uk: null,
-        name_en: null,
-        name_ru: langNameRu || firstCellValue,
-        langGroupId: languageGroupId,
+        nameUK: null,
+        nameEN: null,
+        nameRU: langNameRu || firstCellValue,
+        languageGroupId,
       };
 
       languages.push(lang);
@@ -99,12 +99,12 @@ export const parseCensusTable = (
     const censusRecord: CensusRecord = {
       males: males,
       females: females,
-      langId: languageId,
+      languageId,
       regionId,
     };
 
     censusByReg.push(censusRecord);
   });
 
-  return { censusByReg, langGroups, languages };
+  return { censusByReg, languageGroups, languages };
 };

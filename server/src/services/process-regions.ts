@@ -7,12 +7,12 @@ export const processRegions = async (
   dataSourceConfigName: keyof typeof DATA_SOURCE_CONFIG,
   page: CheerioAPI,
 ): Promise<Region[]> => {
-  const { censusDocumentId, selectorRegions } = DATA_SOURCE_CONFIG[dataSourceConfigName];
+  const { documentId, selectorRegions } = DATA_SOURCE_CONFIG[dataSourceConfigName];
 
   const regionsData = await parseRegions({
     page,
     selectorRegions,
-    censusDocumentId,
+    documentId,
   });
 
   try {

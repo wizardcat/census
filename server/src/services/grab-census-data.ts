@@ -1,6 +1,6 @@
 import { DATA_SOURCE_CONFIG } from '../config';
 import { Region } from '../types';
-import { getData } from './get-data.';
+import { getData } from './get-data';
 import { processCensusByRegion } from './process-census-by-region';
 import { processRegions } from './process-regions';
 
@@ -26,7 +26,10 @@ export const grabCensusData = async (dataSourceConfigName: keyof typeof DATA_SOU
 
   // return { regions, ...data };
   // return { data: data?.censusPageData.censusByReg };
-  return { langGroups: data?.censusPageData.langGroups, languages: data?.censusPageData.languages };
+  return {
+    langGroups: data?.censusPageData.languageGroups,
+    languages: data?.censusPageData.languages,
+  };
   //   regionListId++;
   // } while (regionListId === regions.length - 1);
 };
