@@ -11,7 +11,7 @@ import { LANGUAGES_FOR_FIX } from '../../constants';
 import { CensusTableHeader } from './CensusTableHeader';
 import { useCensusTable } from './useCensusTable';
 
-const CensusTable = () => {
+export const CensusTable = () => {
   const { censusData, getPercentOfTotal } = useCensusTable();
 
   return (
@@ -67,5 +67,3 @@ const CensusTable = () => {
     </Grid>
   );
 };
-
-export default CensusTable;

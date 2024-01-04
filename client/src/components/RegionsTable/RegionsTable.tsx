@@ -14,7 +14,7 @@ import { FormattedMessage } from 'react-intl';
 import { Region } from '../../types';
 import { useRegionsTable } from './useRegionsTable';
 
-const RegionsTable = () => {
+export const RegionsTable = () => {
   const {
     regs,
     handleListItemClick,
@@ -30,12 +30,6 @@ const RegionsTable = () => {
   // if (error) return 'An error has occurred: ' + error.message;
 
   return (
-    // <Box sx={{ width: '100%', position: 'sticky', top: '169px' }}>
-    //   <Paper sx={{ width: '100%', mb: 2 }}>
-    // <Box sx={{ position: 'sticky', top: '169px' }}>
-    //, margin: '0 auto 0 auto'
-    // {/* component={Paper} */}
-    // sx={{ position: 'sticky', top: '153px' }}
     <Grid container>
       <Grid item sx={{ width: '100%' }}>
         <Box>
@@ -102,6 +96,4 @@ const RegionsTable = () => {
     </Grid>
   );
 };
-
-export default RegionsTable;
 

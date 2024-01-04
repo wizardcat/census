@@ -1,5 +1,4 @@
-import CensusTable from './CensusTable/CensusTable'
-import RegionsTable from './RegionsTable/RegionsTable'
-import LocaleButton from './LocaleButton/LocaleButton'
-
-export { CensusTable, RegionsTable, LocaleButton }
+export * from './CensusTable/CensusTable';
+export * from './LocaleButton/LocaleButton';
+export * from './RegionFilter/RegionFilter';
+export * from './RegionsTable/RegionsTable';

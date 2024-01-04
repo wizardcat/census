@@ -3,7 +3,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { LOCALES } from '../../constants';
 import { useLocale } from './useLocale';
 
-const LocaleButton = () => {
+export const LocaleButton = () => {
   const { selectedLocale, handleLocaleChange, handleLocaleClick, locale } = useLocale();
 
   return (
@@ -28,6 +28,4 @@ const LocaleButton = () => {
     </ToggleButtonGroup>
   );
 };
-
-export default LocaleButton;
 

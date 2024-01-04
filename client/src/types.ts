@@ -1,9 +1,3 @@
-// export enum Locale {
-//   ukrainian = 'uk',
-//   english = 'en',
-//   russian = 'ru',
-// }
-
 export type SortOrder = 'asc' | 'desc';
 
 export type QueryGetRegionsParams = {
