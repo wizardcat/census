@@ -6,7 +6,9 @@ import { getPropertyChains } from '../../utils';
 export const useCensusTableHeader = () => {
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
   const [sortBy, setSortBy] = useState('');
-  const messageIds = getPropertyChains(messages.uk, 'tableCensus');
+  const messageIds = getPropertyChains(messages.uk, 'tableCensus').filter(
+    (id) => id !== 'tableCensus.total',
+  );
 
   const handleRequestSort = (event: MouseEvent<unknown>, property: string) => {
     const isAsc = sortBy === property && sortOrder === 'asc';
