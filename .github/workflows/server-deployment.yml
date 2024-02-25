@@ -6,8 +6,8 @@ on:
 
 jobs:
   build:
-   # runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+   # runs-on: self-hosted
     defaults:
       run:
         working-directory: ./server
@@ -22,10 +22,10 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        # cache: 'yarn'
-        # cache-dependency-path: './server'
-    - name: Install Yarn
-      run: npm install -g yarn
+        cache: 'yarn'
+        cache-dependency-path: './server'
+   # - name: Install Yarn
+   #   run: npm install -g yarn
     - name: Install dependencies
       run: yarn install --immutable --immutable-cache --check-cache
     # - run: yarn test
