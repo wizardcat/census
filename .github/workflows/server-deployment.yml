@@ -24,8 +24,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         # cache: 'yarn'
         # cache-dependency-path: './server'
-    # - name: Install Yarn
-    #  run: npm install -g yarn
+    - name: Install Yarn
+      run: npm install -g yarn
     - name: Install dependencies
       run: yarn install --immutable --immutable-cache --check-cache
     # - run: yarn test
