@@ -15,14 +15,17 @@ jobs:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
-    - uses: actions/checkout@v3
-    - name: Install Yarn
-      run: npm install -g yarn
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Setup Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-    - run: yarn install --immutable --immutable-cache --check-cache
+        cache: 'npm'
+       # cache-dependency-path: './server'
+    - name: Install Yarn
+      run: npm install -g yarn
+    - name: Install dependencies
+      run: yarn install --immutable --immutable-cache --check-cache
     # - run: yarn test
     - run: pm2 restart backendserver
