@@ -29,4 +29,6 @@ jobs:
     - name: Install dependencies
       run: yarn install --immutable --immutable-cache --check-cache
     # - run: yarn test
-    - run: pm2 restart server
+    - run: |
+        yarn global add pm2
+        pm2 restart server
