@@ -22,8 +22,8 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-        cache-dependency-path: './server'
+        #cache: 'yarn'
+        #cache-dependency-path: './server'
     - name: Install dependencies
       run: yarn install --immutable --immutable-cache --check-cache
     - name: Build app
