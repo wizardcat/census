@@ -6,7 +6,8 @@
   "author": "Roman Havrylko",
   "license": "MIT",
   "scripts": {
-    "server": "ts-node ./src/index.ts",
+    "start": "ts-node ./src/index.ts",
+    "build": "npx tsc",
     "type-check": "tsc --noEmit",
     "dev": "ts-node-dev --transpile-only --no-notify --exit-child src/index.ts",
     "generate": "ts-node --transpile-only src/schema.ts",
