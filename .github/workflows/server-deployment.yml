@@ -22,13 +22,11 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-   #     cache: 'yarn'
-   #     cache-dependency-path: './server'
-    - name: Install Yarn
-      run: npm install -g yarn
+        cache: 'yarn'
+        cache-dependency-path: './server'
     - name: Install dependencies
       run: yarn install --immutable --immutable-cache --check-cache
-    # - run: yarn test
     - name: Build app
       run: yarn build
+   # - run: yarn test
     - run: pm2 restart census-server
