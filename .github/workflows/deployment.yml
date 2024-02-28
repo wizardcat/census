@@ -1,0 +1,55 @@
+name: Census deployment
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  client:
+    runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: client
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+          cache-dependency-path: 'client'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+        # - run: yarn test
+      - name: Build app
+        run: yarn build
+
+  server:
+    runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: ./server
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+          cache-dependency-path: 'server'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+        # - run: yarn test
+      - name: Build app
+        run: yarn build
+      - run: pm2 restart census-server
