@@ -52,4 +52,3 @@ jobs:
         # - run: yarn test
       - name: Build app
         run: yarn build
-      - run: pm2 restart census-server
