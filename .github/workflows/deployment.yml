@@ -33,7 +33,7 @@ jobs:
     runs-on: self-hosted
     defaults:
       run:
-        working-directory: ./server
+        working-directory: server
     strategy:
       matrix:
         node-version: [18.x]
@@ -45,8 +45,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-          cache-dependency-path: 'server'
+          # cache: 'yarn'
+          # cache-dependency-path: 'server'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
         # - run: yarn test
