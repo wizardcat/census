@@ -1,3 +1,17 @@
+const prod = {
+  url: {
+    BASE_URL: 'http://54.208.60.244:5000',
+  },
+};
+
+const dev = {
+  url: {
+    BASE_URL: 'http://localhost:5000',
+  },
+};
+
+export const config = process.env.NODE_ENV === 'development' ? dev : prod;
+
 export const LOCALES = {
   UKRAINIAN: 'uk',
   ENGLISH: 'en',
@@ -5,8 +19,6 @@ export const LOCALES = {
 };
 
 export const STORAGE_KEY = 'locale';
-
-export const URL = 'http://localhost:3001';
 
 export const LANGUAGES_FOR_FIX = {
   ukrainian: {
@@ -18,4 +30,3 @@ export const LANGUAGES_FOR_FIX = {
     intlId: 'langFix.eastSlavicGroup',
   },
 };
-

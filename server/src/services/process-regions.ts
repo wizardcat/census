@@ -1,6 +1,7 @@
 import { CheerioAPI } from 'cheerio';
-import { DATA_SOURCE_CONFIG } from '../config';
-import { Region } from '../types';
+
+import { DATA_SOURCE_CONFIG } from '@app/config';
+import { Region } from '@app/types';
 import { parseRegions } from './parse-regions';
 
 export const processRegions = async (

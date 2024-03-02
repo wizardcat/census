@@ -1,7 +1,7 @@
+import { config } from '@app/constants';
+import { Census } from '@app/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { URL } from '../constants';
-import { Census } from '../types';
 
 export interface InitialState {
   fetchedCensus: Census[];
@@ -10,6 +10,8 @@ export interface InitialState {
 const initialState: InitialState = {
   fetchedCensus: [],
 };
+
+const url = config.url.BASE_URL;
 
 type Params = { locale: string; regionId: number };
 
@@ -20,7 +22,7 @@ export const getCensusByRegionId = createAsyncThunk(
       const paramsList = Object.keys(params)
         .map((key) => key + '=' + params[key as keyof Params])
         .join('&');
-      const response = await axios.get(`${URL}/census/?${paramsList}`);
+      const response = await axios.get(`${url}/census/?${paramsList}`);
 
       return response.data;
     } catch (error) {
@@ -36,7 +38,7 @@ export const getCensusByRegionId = createAsyncThunk(
 //   async (params: CensusByRegionNameParams, thunkAPI) => {
 //     try {
 //       const paramsList = Object.keys(params).map((key) => key + '=' + params[key as keyof CensusByRegionNameParams]).join('&')
-//       const response = await axios.get(`${URL}/census/by-name/?${paramsList}`);
+//       const response = await axios.get(`${HOST}/census/by-name/?${paramsList}`);
 // // console.log(response.data);
 
 //       return response.data;

@@ -1,13 +1,13 @@
-import { CssBaseline, Container, Box } from '@mui/material'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useAppSelector } from './redux/hooks'
-import I18nProvider from './providers/i18n'
-import { Home } from './pages'
+import { Box, Container, CssBaseline } from '@mui/material';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Home } from './pages';
+import I18nProvider from './providers/i18n';
+import { useAppSelector } from './redux/hooks';
 
 function App() {
-  const curLocale = useAppSelector(state => {
-    return state.locale
-  })
+  const curLocale = useAppSelector((state) => {
+    return state.locale;
+  });
 
   return (
     <I18nProvider locale={curLocale.locale}>
@@ -24,7 +24,7 @@ function App() {
         </div>
       </BrowserRouter>
     </I18nProvider>
-  )
+  );
 }
 
-export default App
+export default App;

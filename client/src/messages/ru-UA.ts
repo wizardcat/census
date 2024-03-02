@@ -1,4 +1,4 @@
-import { LOCALES } from '../constants';
+import { LOCALES } from '@app/constants';
 
 export default {
   [LOCALES.RUSSIAN]: {
@@ -36,4 +36,3 @@ export default {
     regionFilterPlaceholder: 'Введите название региона',
   },
 };
-

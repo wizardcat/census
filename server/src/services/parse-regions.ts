@@ -1,6 +1,6 @@
+import { getMaxRegionId } from '@app/controllers/regions.controller';
+import { Region } from '@app/types';
 import * as cheerio from 'cheerio';
-import { getMaxRegionId } from '../controllers/regions.controller';
-import { Region } from '../types';
 
 type ParseRegionsParams = {
   page: cheerio.CheerioAPI;

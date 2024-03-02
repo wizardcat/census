@@ -1,3 +1,4 @@
+import { LANGUAGES_FOR_FIX } from '@app/constants';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -7,7 +8,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { FormattedMessage } from 'react-intl';
-import { LANGUAGES_FOR_FIX } from '../../constants';
 import { CensusTableHeader } from './CensusTableHeader';
 import { useCensusTable } from './useCensusTable';
 

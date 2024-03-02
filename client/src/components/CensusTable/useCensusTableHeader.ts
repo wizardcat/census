@@ -1,7 +1,7 @@
+import messages from '@app/messages';
+import { SortOrder } from '@app/types';
+import { getPropertyChains } from '@app/utils';
 import { MouseEvent, useState } from 'react';
-import messages from '../../messages';
-import { SortOrder } from '../../types';
-import { getPropertyChains } from '../../utils';
 
 export const useCensusTableHeader = () => {
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');

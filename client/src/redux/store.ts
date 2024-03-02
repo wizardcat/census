@@ -1,13 +1,13 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import regionReducer from './regionsSlice';
+import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import censusReducer from './censusSlice';
 import localReducer from './localesSlice';
+import regionReducer from './regionsSlice';
 
 export const store = configureStore({
   reducer: {
     region: regionReducer,
     census: censusReducer,
-    locale: localReducer
+    locale: localReducer,
   },
 });
 
@@ -19,5 +19,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
-
-

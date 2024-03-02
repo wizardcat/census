@@ -1,8 +1,8 @@
-import debounce from '@mui/utils/debounce';
+import { useAppDispatch } from '@app/redux/hooks';
+import { setRegionNameFilter } from '@app/redux/regionsSlice';
+import { debounce } from '@mui/material';
 import { ChangeEvent, useRef } from 'react';
 import { useIntl } from 'react-intl';
-import { useAppDispatch } from '../../redux/hooks';
-import { setRegionNameFilter } from '../../redux/regionsSlice';
 
 export const useRegionFilter = () => {
   const dispatch = useAppDispatch();

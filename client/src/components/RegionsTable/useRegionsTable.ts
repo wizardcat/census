@@ -1,9 +1,10 @@
+import { config } from '@app/constants';
+import { getCensusByRegionId } from '@app/redux/censusSlice';
+import { useAppDispatch, useAppSelector } from '@app/redux/hooks';
+import { getRegions } from '@app/redux/regionsSlice';
+import { QueryGetRegionsParams } from '@app/types';
 import axios from 'axios';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
-import { getCensusByRegionId } from '../../redux/censusSlice';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getRegions } from '../../redux/regionsSlice';
-import { QueryGetRegionsParams } from '../../types';
 
 export const useRegionsTable = () => {
   const [regionId, setRegionId] = useState(0);
@@ -12,7 +13,7 @@ export const useRegionsTable = () => {
   const prevPage = useRef(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [lastIdList, setLastIdList] = useState([]);
-
+  const url = config.url.BASE_URL;
   const regs = useAppSelector((state) => {
     return state.region.fetchedRegions;
   });
@@ -29,7 +30,7 @@ export const useRegionsTable = () => {
     const paramsList = Object.keys(params)
       .map((key) => key + '=' + params[key as keyof QueryGetRegionsParams])
       .join('&');
-    const response = await axios.get(`${URL}/regions/?${paramsList}`);
+    const response = await axios.get(`${url}/regions/?${paramsList}`);
     return response.data;
   };
 

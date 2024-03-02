@@ -1,6 +1,6 @@
+import { CensusRecord } from '@app/types';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { CensusRecord } from '../types';
 import { getNameByLocale, parsePropNames } from './utils';
 const prisma = new PrismaClient();
 

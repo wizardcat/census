@@ -1,20 +1,22 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { config } from '@app/constants';
+import { QueryGetRegionsParams, Regions } from '@app/types';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { URL } from '../constants';
-import { QueryGetRegionsParams, Regions } from '../types';
 
-export interface InitialStateI {
+export interface InitialState {
   fetchedRegions: Regions;
   regionNameFilter: string;
 }
 
-const initialState: InitialStateI = {
+const initialState: InitialState = {
   fetchedRegions: {
     regions: [],
     regionsCount: 0,
   },
   regionNameFilter: '',
 };
+
+const url = config.url.BASE_URL;
 
 export const getRegions = createAsyncThunk(
   'regions/fetchRegions',
@@ -23,7 +25,7 @@ export const getRegions = createAsyncThunk(
       const paramsList = Object.keys(params)
         .map((key) => key + '=' + params[key as keyof QueryGetRegionsParams])
         .join('&');
-      const response = await axios.get(`${URL}/regions/?${paramsList}`);
+      const response = await axios.get(`${url}/regions/?${paramsList}`);
 
       return response.data;
     } catch (error) {
@@ -36,7 +38,7 @@ export const getRegionsCountByName = createAsyncThunk(
   'regions/fetchRegionsCountByName',
   async (regName: string, thunkAPI) => {
     try {
-      const response = await axios.get(`${URL}/regions/?regName=${regName}`);
+      const response = await axios.get(`${url}/regions/?regName=${regName}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -62,4 +64,3 @@ export const regionsSlice = createSlice({
 export const { setRegionNameFilter } = regionsSlice.actions;
 
 export default regionsSlice.reducer;
-

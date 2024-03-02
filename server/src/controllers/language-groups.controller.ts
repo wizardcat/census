@@ -1,5 +1,5 @@
+import { LanguageGroup } from '@app/types';
 import { Prisma, PrismaClient } from '@prisma/client';
-import { LanguageGroup } from '../types';
 
 const prisma = new PrismaClient();
 
@@ -22,4 +22,3 @@ export const addLanguageGroups = async (languageGroups: LanguageGroup[]) => {
       process.exit(1);
     });
 };
-

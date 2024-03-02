@@ -1,3 +1,4 @@
+import { Region } from '@app/types';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -11,7 +12,6 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import { MouseEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Region } from '../../types';
 import { useRegionsTable } from './useRegionsTable';
 
 export const RegionsTable = () => {
@@ -96,4 +96,3 @@ export const RegionsTable = () => {
     </Grid>
   );
 };
-

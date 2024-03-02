@@ -1,6 +1,3 @@
-export const URL = 'http://localhost';
-export const PORT = '3001';
-
 export const DATA_SOURCE_CONFIG = {
   europeanPart: {
     sourceURL: 'http://www.demoscope.ru/weekly/ssp/rus_lan_97_uezd.php?reg=',
@@ -62,4 +59,3 @@ export const DATA_SOURCE_CONFIG = {
     remarksRU: ``,
   },
 };
-

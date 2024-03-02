@@ -1,5 +1,5 @@
+import { Language } from '@app/types';
 import { Prisma, PrismaClient } from '@prisma/client';
-import { Language } from '../types';
 
 const prisma = new PrismaClient();
 
@@ -22,4 +22,3 @@ export const addLanguages = async (languages: Language[]) => {
       process.exit(1);
     });
 };
-

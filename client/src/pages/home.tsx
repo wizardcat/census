@@ -1,8 +1,8 @@
+import { CensusTable, LocaleButton, RegionFilter, RegionsTable } from '@app/components';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { FormattedMessage } from 'react-intl';
-import { CensusTable, LocaleButton, RegionFilter, RegionsTable } from '../components';
 
 export const Home = () => {
   return (

@@ -1,8 +1,8 @@
+import { LOCALES } from '@app/constants';
+import messages from '@app/messages';
 import flatten from 'flat';
 import { Fragment } from 'react';
 import { IntlProvider } from 'react-intl';
-import { LOCALES } from '../../constants';
-import messages from '../../messages';
 
 interface ProviderData {
   children: JSX.Element;
@@ -22,4 +22,3 @@ Provider.defaultProps = {
 };
 
 export default Provider;
-

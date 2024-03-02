@@ -1,4 +1,4 @@
-import { LOCALES } from '../constants';
+import { LOCALES } from '@app/constants';
 
 export default {
   [LOCALES.ENGLISH]: {
@@ -35,4 +35,3 @@ export default {
     regionFilterPlaceholder: 'Type the region name',
   },
 };
-

@@ -1,5 +1,5 @@
+import { getRegions } from '@app/controllers/regions.controller';
 import { Router } from 'express';
-import { getRegions } from '../controllers/regions.controller';
 const router: Router = Router();
 
 router.get('/', getRegions);

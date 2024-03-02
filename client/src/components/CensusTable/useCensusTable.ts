@@ -1,5 +1,5 @@
-import { useAppSelector } from '../../redux/hooks';
-import { Census, CensusData } from '../../types';
+import { useAppSelector } from '@app/redux/hooks';
+import { Census, CensusData } from '@app/types';
 
 export const useCensusTable = () => {
   const calcTotal = (censusData: CensusData) => {

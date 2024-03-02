@@ -1,5 +1,5 @@
-import { DATA_SOURCE_CONFIG } from '../config';
-import { Region } from '../types';
+import { DATA_SOURCE_CONFIG } from '@app/config';
+import { Region } from '@app/types';
 import { getData } from './get-data';
 import { processCensusByRegion } from './process-census-by-region';
 import { processRegions } from './process-regions';
@@ -33,4 +33,3 @@ export const grabCensusData = async (dataSourceConfigName: keyof typeof DATA_SOU
   //   regionListId++;
   // } while (regionListId === regions.length - 1);
 };
-

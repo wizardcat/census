@@ -1,6 +1,6 @@
+import { Region } from '@app/types';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { Region } from '../types';
 import { getNameByLocale, parsePropNames } from './utils';
 
 const prisma = new PrismaClient();

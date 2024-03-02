@@ -1,6 +1,6 @@
+import { LOCALES, STORAGE_KEY } from '@app/constants';
+import { getFromStorage, saveToStorage } from '@app/utils';
 import { createSlice } from '@reduxjs/toolkit';
-import { LOCALES, STORAGE_KEY } from '../constants';
-import { getFromStorage, saveToStorage } from '../utils/localStorage';
 
 const initialState = {
   locale: getFromStorage(STORAGE_KEY) || LOCALES.ENGLISH,

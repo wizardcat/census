@@ -1,5 +1,5 @@
+import { DATA_SOURCE_CONFIG } from '@app/config';
 import { CheerioAPI } from 'cheerio';
-import { DATA_SOURCE_CONFIG } from '../config';
 import { parseCensusTable } from './parse-census-table';
 
 type ProcessCensusByRegionProps = {

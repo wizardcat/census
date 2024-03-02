@@ -1,5 +1,5 @@
+import { grabCensusData } from '@app/services/grab-census-data';
 import { Request, Response } from 'express';
-import { grabCensusData } from '../services/grab-census-data';
 
 export const extractCensusData = async (req: Request, res: Response) => {
   try {
@@ -15,4 +15,3 @@ export const extractCensusData = async (req: Request, res: Response) => {
     return res.status(500).json({ err: error });
   }
 };
-

@@ -1,6 +1,6 @@
+import { DATA_SOURCE_CONFIG } from '@app/config';
+import { CensusPageData, CensusRecord, Language, LanguageGroup } from '@app/types';
 import * as cheerio from 'cheerio';
-import { DATA_SOURCE_CONFIG } from '../config';
-import { CensusPageData, CensusRecord, Language, LanguageGroup } from '../types';
 
 type ParseCensusTableParams = {
   page: cheerio.CheerioAPI;
