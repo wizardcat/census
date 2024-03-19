@@ -6,7 +6,16 @@ import { getNameByLocale, parsePropNames } from './utils';
 const prisma = new PrismaClient();
 
 export const addRegions = async (regions: Region[]) => {
-  const regionsData: Prisma.RegionUncheckedCreateInput[] = regions;
+  const regionsData: Prisma.RegionUncheckedCreateInput[] = regions.map((region) => {
+    return {
+      documentId: region.documentId,
+      id: region.id,
+      nameEN: region.nameEN,
+      nameRU: region.nameRU,
+      nameUK: region.nameUK,
+      parentId: region.parentId,
+    };
+  });
 
   await Promise.all(
     regionsData.map(async (region) => {

@@ -1,6 +1,7 @@
 import { CheerioAPI } from 'cheerio';
 
 import { DATA_SOURCE_CONFIG } from '@app/config';
+import { addRegions } from '@app/controllers/regions.controller';
 import { Region } from '@app/types';
 import { parseRegions } from './parse-regions';
 
@@ -18,8 +19,7 @@ export const processRegions = async (
 
   try {
     console.log('Regions adding');
-    // console.log(regionsData);
-    // await addRegions(regionsData);
+    await addRegions(regionsData);
     console.log(`${regionsData.length} regions has been added`);
   } catch (err) {
     console.log(err);

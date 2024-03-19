@@ -1,4 +1,7 @@
 import { DATA_SOURCE_CONFIG } from '@app/config';
+import { addCensuses } from '@app/controllers/census.controller';
+import { addLanguageGroups } from '@app/controllers/language-groups.controller';
+import { addLanguages } from '@app/controllers/languages.controller';
 import { CheerioAPI } from 'cheerio';
 import { parseCensusTable } from './parse-census-table';
 
@@ -26,16 +29,16 @@ export const processCensusByRegion = async (
   try {
     if (isFirstRegion) {
       console.log('Language Groups adding');
-      // const lgr = await addLanguageGroups(censusPageData.langGroups);
+      await addLanguageGroups(censusPageData.languageGroups);
       console.log('Language Groups has been added');
 
       console.log('Language adding');
-      // const lg = await addLanguages(censusPageData.languages);
+      await addLanguages(censusPageData.languages);
       console.log('Languages has been added');
     }
 
     console.log(`Censuses  for region ${regionId} adding`);
-    // const cen = await addCensuses(censusPageData.censusByReg);
+    await addCensuses(censusPageData.censusByReg);
     console.log(`Census for region ${regionId} has been added`);
     return { censusPageData };
   } catch (err) {

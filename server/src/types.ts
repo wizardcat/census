@@ -5,6 +5,7 @@ export type Region = {
   nameEN: string | null;
   nameRU: string;
   documentId: number;
+  regionSourceId: string;
 };
 
 export type LanguageGroup = {

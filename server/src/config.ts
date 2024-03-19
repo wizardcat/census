@@ -1,10 +1,10 @@
 export const DATA_SOURCE_CONFIG = {
   europeanPart: {
-    sourceURL: 'http://www.demoscope.ru/weekly/ssp/rus_lan_97_uezd.php?reg=',
+    sourceURL: 'http://www.demoscope.ru/weekly/ssp/rus_lan_97_uezd.php',
     selectorRegions:
-      'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(3) > tbody > tr > td > form > div > select > option:not(:first-of-type)',
+      'body > table:nth-child(1) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(3) > tbody > tr > td > form > div > select > option:not(:first-of-type)',
     selectorTable:
-      'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(5) > tbody > tr:nth-child(n+3)',
+      'body > table:nth-child(1) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(5) > tbody > tr:nth-child(n+3)',
     documentId: 1,
     documentName: `The First General Census of the Russian Empire of 1897.
                 Breakdown of population by mother tongue and districts* in 50 Governorates of the European Russia`,
@@ -19,11 +19,11 @@ export const DATA_SOURCE_CONFIG = {
               В книгах публикации итогов этой строки нет, поскольку там были распределены все до 1 человека.`,
   },
   noEuropeanPart: {
-    sourceURL: 'http://www.demoscope.ru/weekly/ssp/emp_lan_97_uezd.php?reg=',
+    sourceURL: 'http://www.demoscope.ru/weekly/ssp/emp_lan_97_uezd.php',
     selectorRegions:
-      'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(2) > tbody > tr > td > form > div > select > option:not(:first-of-type)',
+      'body > table:nth-child(1) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(2) > tbody > tr > td > form > div > select > option:not(:first-of-type)',
     selectorTable:
-      'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(4) > tbody > tr:nth-child(n+3)',
+      'body > table:nth-child(1) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(4) > tbody > tr:nth-child(n+3)',
     documentId: 2,
     documentName: `The first general census of the population of the Russian Empire in 1897
                   Population distribution by mother tongue and counties
@@ -42,11 +42,11 @@ export const DATA_SOURCE_CONFIG = {
               **** Уссурийская округа - города не было; местопребывание управление село Никольское (муж 8744, жен. 2124), ныне город Никольск-Уссурийский`,
   },
   byOblastsOfEmpire: {
-    sourceURL: 'http://www.demoscope.ru/weekly/ssp/rus_lan_97.php?reg=',
+    sourceURL: 'http://www.demoscope.ru/weekly/ssp/rus_lan_97.php',
     selectorRegions:
-      'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(2) > tbody > tr > td > form > div > select > option:not(:first-of-type)',
+      'body > table:nth-child(1) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(2) > tbody > tr > td > form > div > select > option:not(:first-of-type)',
     selectorTable:
-      'body > table:nth-child(2) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(4) > tbody > tr:nth-child(n+2)',
+      'body > table:nth-child(1) > tbody > tr > td > table > tbody > tr:nth-child(2) > td > center > table:nth-child(4) > tbody > tr:nth-child(n+2)',
     documentId: 3,
     documentName: `The first general census of the population of the Russian Empire in 1897
                   Distribution of the population by native language, provinces and regions`,

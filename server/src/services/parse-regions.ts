@@ -17,7 +17,7 @@ export const parseRegions = async (parseRegionsParams: ParseRegionsParams): Prom
 
   $(selectorRegions).each((parentIndex, parentElem) => {
     const regionName = $(parentElem).text();
-
+    const regionSourceId = $(parentElem).val() as string;
     regionId++;
 
     const isParent = !regionName.includes('----------');
@@ -39,6 +39,7 @@ export const parseRegions = async (parseRegionsParams: ParseRegionsParams): Prom
       nameEN: null,
       nameRU: regionNameRu,
       documentId,
+      regionSourceId,
     };
 
     regionsList.push(region);
