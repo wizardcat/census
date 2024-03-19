@@ -1,9 +1,6 @@
-import { config } from '@app/constants';
+import { useRegion } from '@app/hooks/useRegion';
 import { getCensusByRegionId } from '@app/redux/censusSlice';
 import { useAppDispatch, useAppSelector } from '@app/redux/hooks';
-import { getRegions } from '@app/redux/regionsSlice';
-import { QueryGetRegionsParams } from '@app/types';
-import axios from 'axios';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
 
 export const useRegionsTable = () => {
@@ -13,10 +10,6 @@ export const useRegionsTable = () => {
   const prevPage = useRef(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [lastIdList, setLastIdList] = useState([]);
-  const url = config.url.BASE_URL;
-  const regs = useAppSelector((state) => {
-    return state.region.fetchedRegions;
-  });
 
   const locale = useAppSelector((state) => {
     return state.locale.locale;
@@ -26,13 +19,15 @@ export const useRegionsTable = () => {
     return state.region.regionNameFilter;
   });
 
-  const getReg = async (params: QueryGetRegionsParams) => {
-    const paramsList = Object.keys(params)
-      .map((key) => key + '=' + params[key as keyof QueryGetRegionsParams])
-      .join('&');
-    const response = await axios.get(`${url}/regions/?${paramsList}`);
-    return response.data;
-  };
+  const [params, setParams] = useState({
+    lastId: lastIdList[page - 1],
+    skip: rowsPerPage,
+    take: rowsPerPage,
+    locale,
+    region: regionNameFilter,
+  });
+
+  const regs = useRegion(params);
 
   useEffect(() => {
     let idx = 0;
@@ -42,37 +37,21 @@ export const useRegionsTable = () => {
       idx = page;
     }
     if (lastIdList.length === 0 || lastIdList[idx] >= 0) {
-      let params: QueryGetRegionsParams = {
+      setParams({
         lastId: lastIdList[page - 1],
         skip: rowsPerPage,
         take: rowsPerPage,
         locale,
         region: regionNameFilter,
-      };
-
-      // const { isLoading, error, data: regData, isFetching } = useQuery(["repoData", params], () => getReg(params)
-      // axios.get(
-      //   "https://api.github.com/repos/tannerlinsley/react-query"
-      // ).then((res) => res.data)
-      // );
-
-      dispatch(getRegions(params));
-      // dispatch(regData)
+      });
     }
-  }, [dispatch, locale, page, rowsPerPage, lastIdList, regionNameFilter]);
+  }, [locale, page, rowsPerPage, lastIdList, regionNameFilter]);
 
   useEffect(() => {
-    if (regs.regions.length > 0) {
-      setRegionId(regs.regions[0].id);
+    if (regs?.regions.length > 0) {
+      setRegionId(regs?.regions[0].id);
     }
   }, [page, regs]);
-
-  // useEffect(() => {
-  //   if (regionId > 0) {
-  //     const params = { locale: locale, regionId: regionId };
-  //     dispatch(getCensusByRegionId(params));
-  //   }
-  // }, [dispatch, locale, page, rowsPerPage, regionId]);
 
   useEffect(() => {
     if (regionId > 0) {

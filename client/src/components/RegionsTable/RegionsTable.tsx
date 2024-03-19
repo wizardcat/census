@@ -1,4 +1,5 @@
 import { Region } from '@app/types';
+import { TablePagination } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -7,7 +8,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import { MouseEvent } from 'react';
@@ -50,7 +50,7 @@ export const RegionsTable = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {regs.regions.map((region: Region, idx: number) => {
+                  {regs?.regions?.map((region: Region, idx: number) => {
                     return (
                       <TableRow
                         hover
@@ -84,9 +84,9 @@ export const RegionsTable = () => {
               labelRowsPerPage={<FormattedMessage id="tableRegions.labelRowsPerPage" />}
               rowsPerPageOptions={[10, 15, 20]}
               component="div"
-              count={regs.regionsCount}
+              count={regs?.regionsCount ?? 0}
               rowsPerPage={rowsPerPage}
-              page={page}
+              page={rowsPerPage >= (regs?.regionsCount ?? 0) ? 0 : page}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />

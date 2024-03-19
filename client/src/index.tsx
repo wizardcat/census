@@ -1,18 +1,23 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 import App from './App';
 import './index.css';
 import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-
+const queryClient = new QueryClient();
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
+    <QueryClientProvider client={queryClient}>
       <App />
-    </React.StrictMode>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+    {/* </React.StrictMode> */}
   </Provider>,
 );
 
