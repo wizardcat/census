@@ -25,7 +25,7 @@ export const getRegions = createAsyncThunk(
       const paramsList = Object.keys(params)
         .map((key) => key + '=' + params[key as keyof QueryGetRegionsParams])
         .join('&');
-      const response = await axios.get(`${url}/regions/?${paramsList}`);
+      const response = await axios.get(`${url}/api/regions/?${paramsList}`);
 
       return response.data;
     } catch (error) {
@@ -38,7 +38,7 @@ export const getRegionsCountByName = createAsyncThunk(
   'regions/fetchRegionsCountByName',
   async (regName: string, thunkAPI) => {
     try {
-      const response = await axios.get(`${url}/regions/?regName=${regName}`);
+      const response = await axios.get(`${url}/api/regions/?regName=${regName}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

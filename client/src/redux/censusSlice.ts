@@ -22,7 +22,7 @@ export const getCensusByRegionId = createAsyncThunk(
       const paramsList = Object.keys(params)
         .map((key) => key + '=' + params[key as keyof Params])
         .join('&');
-      const response = await axios.get(`${url}/census/?${paramsList}`);
+      const response = await axios.get(`${url}/api/census/?${paramsList}`);
 
       return response.data;
     } catch (error) {

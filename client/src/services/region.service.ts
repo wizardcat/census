@@ -10,7 +10,7 @@ export const getRegionsAll = async (params: QueryGetRegionsParams) => {
   const paramsList = Object.keys(params)
     .map((key) => key + '=' + params[key as keyof QueryGetRegionsParams])
     .join('&');
-  const data = await axios.get(`${url}/regions/?${paramsList}`);
+  const data = await axios.get(`${url}/api/regions/?${paramsList}`);
 
   return data;
   // } catch (error) {
@@ -20,7 +20,7 @@ export const getRegionsAll = async (params: QueryGetRegionsParams) => {
 
 export const getRegionsCountByName = async (regName: string) => {
   try {
-    const { data } = await axios.get(`${url}/regions/?regName=${regName}`);
+    const { data } = await axios.get(`${url}/api/regions/?regName=${regName}`);
 
     return data;
   } catch (error) {
