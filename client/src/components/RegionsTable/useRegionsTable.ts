@@ -1,6 +1,6 @@
 import { useRegion } from '@app/hooks/useRegion';
-import { getCensusByRegionId } from '@app/redux/censusSlice';
 import { useAppDispatch, useAppSelector } from '@app/redux/hooks';
+import { setCurrentRegionId } from '@app/redux/regionsSlice';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
 
 export const useRegionsTable = () => {
@@ -55,10 +55,9 @@ export const useRegionsTable = () => {
 
   useEffect(() => {
     if (regionId > 0) {
-      const params = { locale: locale, regionId: regionId };
-      dispatch(getCensusByRegionId(params));
+      dispatch(setCurrentRegionId(regionId));
     }
-  }, [dispatch, locale, page, rowsPerPage, regionId]);
+  }, [dispatch, regionId]);
 
   const handleListItemClick = (event: MouseEvent<HTMLElement>, id: number) => {
     setRegionId(id);

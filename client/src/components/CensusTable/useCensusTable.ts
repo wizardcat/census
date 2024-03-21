@@ -1,18 +1,28 @@
+import { useCensus } from '@app/hooks/useCensus';
 import { useAppSelector } from '@app/redux/hooks';
-import { Census, CensusData } from '@app/types';
+import { Census } from '@app/types';
 
 export const useCensusTable = () => {
-  const calcTotal = (censusData: CensusData) => {
+  const locale = useAppSelector((state) => {
+    return state.locale.locale;
+  });
+
+  const currentRegionId = useAppSelector((state) => {
+    return state.region.currentRegionId;
+  });
+
+  const calcTotal = (censusData: Census[]) => {
     return censusData.reduce((prev, cur) => {
       return Number(prev) + Number(cur.males) + Number(cur.females);
     }, 0);
   };
 
-  const censusData = useAppSelector((state) => {
-    return state.census.fetchedCensus;
+  const censusData = useCensus({
+    locale,
+    regionId: currentRegionId,
   });
 
-  const total = calcTotal(censusData);
+  const total = censusData ? calcTotal(censusData) : 0;
 
   const getPercentOfTotal = (peopleCount: Pick<Census, 'males' | 'females'>): string | null => {
     const percent =

@@ -1,4 +1,4 @@
-import { LANGUAGES_FOR_FIX } from '@app/constants';
+import { languageReplace } from '@app/constants';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -23,7 +23,7 @@ export const CensusTable = () => {
               <Table stickyHeader size="small" aria-label="census table">
                 <CensusTableHeader />
                 <TableBody>
-                  {censusData.map((censusRecord, idx: number) => (
+                  {censusData?.map((censusRecord, idx: number) => (
                     <TableRow
                       key={censusRecord.language.id}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -33,19 +33,19 @@ export const CensusTable = () => {
                         {++idx}
                       </TableCell>
                       <TableCell align="right">
-                        {LANGUAGES_FOR_FIX.ukrainian.wordForms.includes(
+                        {languageReplace.ukrainian.wordForms.includes(
                           censusRecord.language.name,
                         ) ? (
-                          <FormattedMessage id={LANGUAGES_FOR_FIX.ukrainian.intlId} />
+                          <FormattedMessage id={languageReplace.ukrainian.intlId} />
                         ) : (
                           censusRecord.language.name
                         )}
                       </TableCell>
                       <TableCell align="right">
-                        {LANGUAGES_FOR_FIX.russian.wordForms.includes(
+                        {languageReplace.russian.wordForms.includes(
                           censusRecord.language.languageGroup.name,
                         ) ? (
-                          <FormattedMessage id={LANGUAGES_FOR_FIX.russian.intlId} />
+                          <FormattedMessage id={languageReplace.russian.intlId} />
                         ) : (
                           censusRecord.language.languageGroup.name
                         )}

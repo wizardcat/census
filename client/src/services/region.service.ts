@@ -5,17 +5,12 @@ import axios from 'axios';
 const url = config.url.BASE_URL;
 
 export const getRegionsAll = async (params: QueryGetRegionsParams) => {
-  // try {
-
   const paramsList = Object.keys(params)
     .map((key) => key + '=' + params[key as keyof QueryGetRegionsParams])
     .join('&');
   const data = await axios.get(`${url}/api/regions/?${paramsList}`);
 
   return data;
-  // } catch (error) {
-  //   return error;
-  // }
 };
 
 export const getRegionsCountByName = async (regName: string) => {

@@ -1,4 +1,4 @@
-import { LOCALES } from '@app/constants';
+import { locales } from '@app/constants';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useLocale } from './useLocale';
@@ -16,13 +16,13 @@ export const LocaleButton = () => {
       defaultValue={locale}
       sx={{ height: '20px', marginBottom: '20px' }}
     >
-      <ToggleButton value="uk" onClick={() => handleLocaleClick(LOCALES.UKRAINIAN)}>
+      <ToggleButton value="uk" onClick={() => handleLocaleClick(locales.UKRAINIAN)}>
         UK
       </ToggleButton>
-      <ToggleButton value="en" onClick={() => handleLocaleClick(LOCALES.ENGLISH)}>
+      <ToggleButton value="en" onClick={() => handleLocaleClick(locales.ENGLISH)}>
         EN
       </ToggleButton>
-      <ToggleButton value="ru" onClick={() => handleLocaleClick(LOCALES.RUSSIAN)}>
+      <ToggleButton value="ru" onClick={() => handleLocaleClick(locales.RUSSIAN)}>
         RU
       </ToggleButton>
     </ToggleButtonGroup>

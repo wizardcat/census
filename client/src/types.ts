@@ -8,6 +8,8 @@ export type QueryGetRegionsParams = {
   region?: string;
 };
 
+export type QueryGetCensusParams = { locale: string; regionId: number };
+
 export type Census = {
   id: number;
   language: {
@@ -22,8 +24,6 @@ export type Census = {
   females: number | null;
   regionId: number;
 };
-
-export type CensusData = Census[];
 
 export type Region = {
   id: number;

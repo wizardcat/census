@@ -12,21 +12,24 @@ const dev = {
 
 export const config = process.env.NODE_ENV === 'development' ? dev : prod;
 
-export const LOCALES = {
+export const locales = {
   UKRAINIAN: 'uk',
   ENGLISH: 'en',
   RUSSIAN: 'ru',
 };
 
-export const STORAGE_KEY = 'locale';
+export const storageKey = {
+  LOCALE: 'locale',
+  CURRENT_REGION_ID: 'currentRegionId',
+};
 
-export const LANGUAGES_FOR_FIX = {
+export const languageReplace = {
   ukrainian: {
     wordForms: ['Малоруська', 'Malorussian', 'Малорусский'],
-    intlId: 'langFix.ukrainian',
+    intlId: 'languageReplace.ukrainian',
   },
   russian: {
     wordForms: ['Російська', 'Russian', 'Русский'],
-    intlId: 'langFix.eastSlavicGroup',
+    intlId: 'languageReplace.eastSlavicGroup',
   },
 };

@@ -1,9 +1,9 @@
-import { LOCALES, STORAGE_KEY } from '@app/constants';
+import { locales, storageKey } from '@app/constants';
 import { getFromStorage, saveToStorage } from '@app/utils';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  locale: getFromStorage(STORAGE_KEY) || LOCALES.ENGLISH,
+  locale: getFromStorage(storageKey.LOCALE) || locales.ENGLISH,
 };
 
 export const localeSlice = createSlice({
@@ -14,20 +14,14 @@ export const localeSlice = createSlice({
       return action.payload;
     },
 
-    addLocale: (state, action) => {
-      saveToStorage(STORAGE_KEY, action.payload);
+    setLocale: (state, action) => {
+      saveToStorage(storageKey.LOCALE, action.payload);
 
       return { ...state, locale: action.payload };
-    },
-
-    getLocale: (state, action) => {
-      return {
-        locale: state.locale || getFromStorage(STORAGE_KEY) || LOCALES.ENGLISH,
-      };
     },
   },
 });
 
-export const { addLocale, getLocale } = localeSlice.actions;
+export const { setLocale } = localeSlice.actions;
 
 export default localeSlice.reducer;

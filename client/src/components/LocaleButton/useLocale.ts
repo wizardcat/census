@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@app/redux/hooks';
-import { addLocale } from '@app/redux/localesSlice';
+import { setLocale } from '@app/redux/localesSlice';
 import { useState } from 'react';
 
 export const useLocale = () => {
@@ -14,7 +14,7 @@ export const useLocale = () => {
   };
 
   const handleLocaleClick = (locale: string) => {
-    dispatch(addLocale(locale));
+    dispatch(setLocale(locale));
   };
 
   const dispatch = useAppDispatch();

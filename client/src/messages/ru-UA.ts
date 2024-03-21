@@ -1,7 +1,7 @@
-import { LOCALES } from '@app/constants';
+import { locales } from '@app/constants';
 
 export default {
-  [LOCALES.RUSSIAN]: {
+  [locales.RUSSIAN]: {
     header: `Первая всеобщая перепись населения Российской Империи 1897 г. 
     Распределение населения по родному языку и уездам России`,
     tableRegions: {
@@ -27,7 +27,7 @@ export default {
     search: 'Поиск',
 
     //In Russian Empire east slavic languages counted as a russian dialect. Switch it to the reality.
-    langFix: {
+    languageReplace: {
       eastSlavicGroup: 'Восточно-словянские языки*',
       ukrainian: 'Украинский (Малорусский*)',
       russian: 'Русский',
