@@ -12,7 +12,7 @@ export const useRegionsTable = () => {
   const [lastIdList, setLastIdList] = useState([]);
 
   const locale = useAppSelector((state) => {
-    return state.locale.locale;
+    return state.locale.currentLocale;
   });
 
   const regionNameFilter = useAppSelector((state) => {

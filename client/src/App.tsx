@@ -5,12 +5,12 @@ import I18nProvider from './providers/i18n';
 import { useAppSelector } from './redux/hooks';
 
 function App() {
-  const curLocale = useAppSelector((state) => {
+  const locale = useAppSelector((state) => {
     return state.locale;
   });
 
   return (
-    <I18nProvider locale={curLocale.locale}>
+    <I18nProvider locale={locale.currentLocale}>
       <BrowserRouter>
         <CssBaseline />
         <div>

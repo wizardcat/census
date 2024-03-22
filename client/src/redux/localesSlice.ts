@@ -3,7 +3,7 @@ import { getFromStorage, saveToStorage } from '@app/utils';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  locale: getFromStorage(storageKey.LOCALE) || locales.ENGLISH,
+  currentLocale: getFromStorage(storageKey.LOCALE) || locales.ENGLISH,
 };
 
 export const localeSlice = createSlice({
@@ -14,14 +14,14 @@ export const localeSlice = createSlice({
       return action.payload;
     },
 
-    setLocale: (state, action) => {
+    setCurrentLocale: (state, action) => {
       saveToStorage(storageKey.LOCALE, action.payload);
 
-      return { ...state, locale: action.payload };
+      return { ...state, currentLocale: action.payload };
     },
   },
 });
 
-export const { setLocale } = localeSlice.actions;
+export const { setCurrentLocale } = localeSlice.actions;
 
 export default localeSlice.reducer;

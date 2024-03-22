@@ -4,7 +4,7 @@ import { Census } from '@app/types';
 
 export const useCensusTable = () => {
   const locale = useAppSelector((state) => {
-    return state.locale.locale;
+    return state.locale.currentLocale;
   });
 
   const currentRegionId = useAppSelector((state) => {
