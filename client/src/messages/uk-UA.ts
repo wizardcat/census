@@ -30,7 +30,7 @@ export default {
     languageReplace: {
       eastSlavicGroup: `Східно-слов'янські мови*`,
       ukrainian: 'Українська (Малоруська*)',
-      russian: 'Російська',
+      russian: 'Російська (Великоросійська*)',
       belarussian: 'Білоруська',
     },
     regionFilterPlaceholder: 'Введіть назву регіона',

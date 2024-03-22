@@ -1,4 +1,3 @@
-import { languageReplace } from '@app/constants';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -7,12 +6,11 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
-import { FormattedMessage } from 'react-intl';
 import { CensusTableHeader } from './CensusTableHeader';
 import { useCensusTable } from './useCensusTable';
 
 export const CensusTable = () => {
-  const { censusData, getPercentOfTotal } = useCensusTable();
+  const { censusData, getPercentOfTotal, getLanguageName, getLanguageGroupName } = useCensusTable();
 
   return (
     <Grid container spacing={2}>
@@ -32,19 +30,9 @@ export const CensusTable = () => {
                       <TableCell component="th" scope="row">
                         {++idx}
                       </TableCell>
+                      <TableCell align="right">{getLanguageName(language.name)}</TableCell>
                       <TableCell align="right">
-                        {languageReplace.ukrainian.wordForms.includes(language.name) ? (
-                          <FormattedMessage id={languageReplace.ukrainian.intlId} />
-                        ) : (
-                          language.name
-                        )}
-                      </TableCell>
-                      <TableCell align="right">
-                        {languageReplace.russian.wordForms.includes(language.languageGroup.name) ? (
-                          <FormattedMessage id={languageReplace.russian.intlId} />
-                        ) : (
-                          language.languageGroup.name
-                        )}
+                        {getLanguageGroupName(language.languageGroup.name)}
                       </TableCell>
                       <TableCell align="right">{males || ''}</TableCell>
                       <TableCell align="right">{females || ''}</TableCell>

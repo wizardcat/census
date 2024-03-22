@@ -5,7 +5,7 @@ import { censusRoute, importData, regionsRoute } from './routes';
 
 const prisma = new PrismaClient();
 const app: Application = express();
-const port = 5000;
+const port = 3001;
 
 app.use(express.json());
 app.use(cors({ origin: '*' }));

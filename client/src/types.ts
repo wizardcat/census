@@ -20,8 +20,8 @@ export type Census = {
       name: string;
     };
   };
-  males: number | null;
-  females: number | null;
+  males: number;
+  females: number;
   regionId: number;
 };
 

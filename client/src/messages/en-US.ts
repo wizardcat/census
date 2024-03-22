@@ -29,7 +29,7 @@ export default {
     languageReplace: {
       eastSlavicGroup: 'East Slavic languages*',
       ukrainian: 'Ukrainian (Malorussian*)',
-      russian: 'Russian',
+      russian: 'Russian (Great Russian*)',
       belarussian: 'Belarussian',
     },
     regionFilterPlaceholder: 'Type the region name',

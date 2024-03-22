@@ -6,7 +6,7 @@ const prod = {
 
 const dev = {
   url: {
-    BASE_URL: 'http://localhost:5000',
+    BASE_URL: 'http://localhost:3001',
   },
 };
 
@@ -23,12 +23,18 @@ export const storageKey = {
   CURRENT_REGION_ID: 'currentRegionId',
 };
 
-export const languageReplace = {
-  ukrainian: {
-    wordForms: ['Малоруська', 'Malorussian', 'Малорусский'],
-    intlId: 'languageReplace.ukrainian',
-  },
-  russian: {
+export const substitutions = {
+  language: [
+    {
+      wordForms: ['Малоруська', 'Malorussian', 'Малорусский'],
+      intlId: 'languageReplace.ukrainian',
+    },
+    {
+      wordForms: ['Великоросійська', 'Great Russian', 'Великорусский'],
+      intlId: 'languageReplace.russian',
+    },
+  ],
+  languageGroup: {
     wordForms: ['Російська', 'Russian', 'Русский'],
     intlId: 'languageReplace.eastSlavicGroup',
   },

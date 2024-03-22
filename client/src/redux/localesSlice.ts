@@ -2,7 +2,11 @@ import { locales, storageKey } from '@app/constants';
 import { getFromStorage, saveToStorage } from '@app/utils';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+export interface InitialState {
+  currentLocale: string;
+}
+
+const initialState: InitialState = {
   currentLocale: getFromStorage(storageKey.LOCALE) || locales.ENGLISH,
 };
 
