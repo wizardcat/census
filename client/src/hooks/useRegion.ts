@@ -1,9 +1,9 @@
 import { getRegionsAll } from '@app/services/region.service';
-import { QueryGetRegionsParams } from '@app/types';
+import { QueryGetRegionsParams, Regions } from '@app/types';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 // import { errorCatch } from '@/api/api.helper';
 
-export const useRegion = (params: QueryGetRegionsParams) => {
+export const useRegion = (params: QueryGetRegionsParams): Regions => {
   const { data } = useQuery({
     queryKey: ['get regions', params],
     queryFn: () => getRegionsAll(params),

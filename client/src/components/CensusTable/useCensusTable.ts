@@ -24,11 +24,9 @@ export const useCensusTable = () => {
 
   const total = censusData ? calcTotal(censusData) : 0;
 
-  const getPercentOfTotal = (peopleCount: Pick<Census, 'males' | 'females'>): string | null => {
+  const getPercentOfTotal = (males: number | null, females: number | null): string | null => {
     const percent =
-      peopleCount.males || peopleCount.females
-        ? (((Number(peopleCount.males) + Number(peopleCount.females)) * 100) / total).toFixed(3)
-        : null;
+      males || females ? (((Number(males) + Number(females)) * 100) / total).toFixed(3) : null;
     return percent;
   };
 

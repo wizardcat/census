@@ -20,11 +20,11 @@ export const useCensusTableHeader = () => {
     handleRequestSort(event, property);
   };
 
-  const getSortDirection = (mesId: string) => (sortBy === mesId ? sortOrder : false);
+  const getSortDirection = (id: string) => (sortBy === id ? sortOrder : false);
 
-  const getActive = (mesId: string) => sortBy === mesId;
+  const getActive = (id: string) => sortBy === id;
 
-  const getDirection = (mesId: string) => (sortBy === mesId ? sortOrder : 'asc');
+  const getDirection = (id: string) => (sortBy === id ? sortOrder : 'asc');
 
   return {
     sortOrder,

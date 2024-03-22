@@ -27,7 +27,7 @@ export const useRegionsTable = () => {
     region: regionNameFilter,
   });
 
-  const regs = useRegion(params);
+  const regionsData = useRegion(params);
 
   useEffect(() => {
     let idx = 0;
@@ -48,10 +48,10 @@ export const useRegionsTable = () => {
   }, [locale, page, rowsPerPage, lastIdList, regionNameFilter]);
 
   useEffect(() => {
-    if (regs?.regions.length > 0) {
-      setRegionId(regs?.regions[0].id);
+    if (regionsData?.regions.length > 0) {
+      setRegionId(regionsData?.regions[0].id);
     }
-  }, [page, regs]);
+  }, [page, regionsData]);
 
   useEffect(() => {
     if (regionId > 0) {
@@ -69,9 +69,9 @@ export const useRegionsTable = () => {
     setLastIdList((prev) => {
       let newList: any = prev;
       if (prev.length === 0 || page === 0) {
-        newList[0] = regs.regions[regs.regions.length - 1].id;
+        newList[0] = regionsData.regions[regionsData.regions.length - 1].id;
       } else {
-        newList[page] = regs.regions[regs.regions.length - 1].id;
+        newList[page] = regionsData.regions[regionsData.regions.length - 1].id;
       }
 
       return newList;
@@ -88,7 +88,7 @@ export const useRegionsTable = () => {
 
   return {
     // regData, isLoading, error, isFetching,
-    regs,
+    regionsData,
     handleListItemClick,
     regionId,
     rowsPerPage,

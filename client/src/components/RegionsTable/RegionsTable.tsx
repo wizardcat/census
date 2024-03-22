@@ -1,4 +1,3 @@
-import { Region } from '@app/types';
 import { TablePagination } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -16,7 +15,7 @@ import { useRegionsTable } from './useRegionsTable';
 
 export const RegionsTable = () => {
   const {
-    regs,
+    regionsData,
     handleListItemClick,
     regionId,
     rowsPerPage,
@@ -50,7 +49,7 @@ export const RegionsTable = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {regs?.regions?.map((region: Region, idx: number) => {
+                  {regionsData?.regions.map((region, idx) => {
                     return (
                       <TableRow
                         hover
@@ -84,9 +83,9 @@ export const RegionsTable = () => {
               labelRowsPerPage={<FormattedMessage id="tableRegions.labelRowsPerPage" />}
               rowsPerPageOptions={[10, 15, 20]}
               component="div"
-              count={regs?.regionsCount ?? 0}
+              count={regionsData?.regionsCount ?? 0}
               rowsPerPage={rowsPerPage}
-              page={rowsPerPage >= (regs?.regionsCount ?? 0) ? 0 : page}
+              page={rowsPerPage >= (regionsData?.regionsCount ?? 0) ? 0 : page}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />

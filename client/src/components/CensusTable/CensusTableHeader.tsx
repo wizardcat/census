@@ -21,16 +21,16 @@ export function CensusTableHeader() {
   return (
     <TableHead>
       <TableRow>
-        {messageIds.map((mesId) => {
+        {messageIds.map((id) => {
           return (
-            <TableCell key={mesId} align="right" sortDirection={getSortDirection(mesId)}>
+            <TableCell key={id} align="right" sortDirection={getSortDirection(id)}>
               <TableSortLabel
-                active={getActive(mesId)}
-                direction={getDirection(mesId)}
-                onClick={createSortHandler(mesId)}
+                active={getActive(id)}
+                direction={getDirection(id)}
+                onClick={createSortHandler(id)}
               >
-                <FormattedMessage id={mesId} />
-                {sortBy === mesId ? (
+                <FormattedMessage id={id} />
+                {sortBy === id ? (
                   <Box component="span" sx={visuallyHidden}>
                     {sortOrder === 'desc' ? 'sorted descending' : 'sorted ascending'}
                   </Box>
