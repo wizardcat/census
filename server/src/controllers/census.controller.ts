@@ -4,8 +4,8 @@ import { Request, Response } from 'express';
 import { getNameByLocale, parsePropNames } from './utils';
 const prisma = new PrismaClient();
 
-export const addCensuses = async (census: CensusRecord[]) => {
-  let censusData: Prisma.CensusUncheckedCreateInput[] = census;
+export const addCensus = async (census: CensusRecord[]) => {
+  const censusData: Prisma.CensusUncheckedCreateInput[] = census;
 
   await Promise.all(
     censusData.map(async (census) => {
@@ -89,7 +89,6 @@ export const getCensusByRegionName = async (req: Request, res: Response) => {
 
   if (!regionId) return;
 
-  // console.log('regionId: ' + regionId);
   const censusData = await prisma.census.findMany({
     orderBy: {
       language: {
@@ -127,7 +126,7 @@ export const getCensusByRegionName = async (req: Request, res: Response) => {
 
   try {
     const census = parsePropNames(censusData);
-    // console.log('census: ' + JSON.stringify(census).length);
+
     return res.status(200).json(census);
   } catch (error) {
     return res.status(500).json({ err: error });

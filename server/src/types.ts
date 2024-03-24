@@ -1,3 +1,10 @@
+export type Document = {
+  id: number;
+  nameUK: string | null;
+  nameEN: string | null;
+  nameRU: string;
+};
+
 export type Region = {
   id: number;
   parentId: number;
