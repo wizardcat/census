@@ -4,11 +4,16 @@
   },
   "extends": "./tsconfig.paths.json",
   "include": ["src/**/*"],
+  "type": "module",
   "compilerOptions": {
     "outDir": "./build",
     "lib": ["esnext"],
     "rootDir": "src",
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "module": "esnext",
+    "target": "ES2021",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
   }
 }
