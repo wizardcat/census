@@ -43,3 +43,11 @@ export type CensusPageData = {
   languageGroups: LanguageGroup[];
   languages: Language[];
 };
+
+export type GetRegionParams = {
+  locale: string;
+  lastId: string;
+  skip: string;
+  take: string;
+  region: string;
+};

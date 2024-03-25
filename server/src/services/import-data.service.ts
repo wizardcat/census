@@ -1,9 +1,9 @@
 import { DATA_SOURCE_CONFIG } from '@app/config';
-import { getData } from './get-data';
-import { processCensusByRegion } from './process-census-by-region';
-import { processRegions } from './process-regions';
+import { getData } from './utils/get-data';
+import { processCensusByRegion } from './utils/process-census-by-region';
+import { processRegions } from './utils/process-regions';
 
-export const grabCensusData = async (dataSourceConfigName: keyof typeof DATA_SOURCE_CONFIG) => {
+export const importData = async (dataSourceConfigName: keyof typeof DATA_SOURCE_CONFIG) => {
   const { sourceURL } = DATA_SOURCE_CONFIG[dataSourceConfigName];
   let isFirstRegion = true;
   let page;

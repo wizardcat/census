@@ -1,7 +1,7 @@
-import { getRegions } from '@app/controllers/regions.controller';
+import { getRegions } from '@app/controllers';
 import { Router } from 'express';
 const router: Router = Router();
 
-router.get('/regions', getRegions);
+router.get('/', getRegions);
 // router.get('/region-by-id', getRegionById);
 export default router;

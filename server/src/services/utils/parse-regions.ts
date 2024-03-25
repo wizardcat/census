@@ -1,4 +1,4 @@
-import { getMaxRegionId } from '@app/controllers/regions.controller';
+import { getMaxRegionId } from '@app/services';
 import { Region } from '@app/types';
 import * as cheerio from 'cheerio';
 

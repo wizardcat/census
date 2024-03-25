@@ -1,87 +1,29 @@
-import { Region } from '@app/types';
-import { Prisma, PrismaClient } from '@prisma/client';
+import { TypedRequestQuery } from '@app/interfaces';
+import * as services from '@app/services';
+import { GetRegionParams } from '@app/types';
 import { Request, Response } from 'express';
-import { getNameByLocale, parsePropNames } from './utils';
 
-const prisma = new PrismaClient();
+export const getRegions = async (req: TypedRequestQuery<GetRegionParams>, res: Response) => {
+  // const { locale, lastId, skip, take, region } = req.query;
+  // const locale = req.query.locale as string;
+  // const lastId = req.query.lastId as string;
+  // const skip = req.query.skip as string;
+  // const take = req.query.take as string;
+  // const region = req.query.region as string;
 
-export const addRegions = async (regions: Region[]) => {
-  const regionsData: Prisma.RegionUncheckedCreateInput[] = regions.map((region) => {
-    return {
-      documentId: region.documentId,
-      id: region.id,
-      nameEN: region.nameEN,
-      nameRU: region.nameRU,
-      nameUK: region.nameUK,
-      parentId: region.parentId,
-    };
-  });
-
-  await Promise.all(
-    regionsData.map(async (region) => {
-      await prisma.region.create({
-        data: region,
-      });
-    }),
-  )
-    .then(async () => {
-      await prisma.$disconnect();
-    })
-    .catch(async (e) => {
-      console.error(e);
-      await prisma.$disconnect();
-      process.exit(1);
-    });
-};
-
-export const getRegions = async (req: Request, res: Response) => {
-  const { locale, lastId, skip, take, region } = req.query;
-
-  const nameByLocale = getNameByLocale(locale as string);
-
-  const regionsData = await prisma.region.findMany({
-    take: Number(take) || 5,
-    select: {
-      id: true,
-      parentId: true,
-      [nameByLocale]: true,
-    },
-    orderBy: {
-      id: 'asc',
-    },
-    where: {
-      id: { gt: Number(lastId) || 0 },
-      [nameByLocale]: { contains: region as string },
-    },
-  });
-
-  const regionsCount = await prisma.region.count({
-    where: {
-      [nameByLocale]: {
-        contains: region as string,
-      },
-    },
-  });
-
-  const regions = parsePropNames(regionsData);
-
-  const regData = { regions, regionsCount };
+  const regions = await services.getRegions(req.query);
 
   try {
-    return res.status(200).json(regData);
+    return res.status(200).json(regions);
   } catch (error) {
     return res.status(500).json({ err: error });
   }
 };
 
 export const getRegionsCountByName = async (req: Request, res: Response) => {
-  const { name } = req.query;
+  const name = req.query.name as string;
 
-  const regionsCount = await prisma.region.count({
-    where: {
-      nameEN: { contains: name as string },
-    },
-  });
+  const regionsCount = await services.getRegionsCountByName(name);
 
   try {
     return res.status(200).json(regionsCount);
@@ -91,15 +33,10 @@ export const getRegionsCountByName = async (req: Request, res: Response) => {
 };
 
 export const getRegionIdByName = async (req: Request, res: Response) => {
-  const { locale, name } = req.query;
+  const locale = req.query.locale as string;
+  const name = req.query.name as string;
 
-  const nameByLocale = getNameByLocale(locale as string);
-
-  const regionId = await prisma.region.findFirst({
-    where: {
-      [nameByLocale]: { contains: name as string },
-    },
-  });
+  const regionId = await services.getRegionIdByName(locale, name);
 
   try {
     return res.status(200).json(regionId);
@@ -109,24 +46,15 @@ export const getRegionIdByName = async (req: Request, res: Response) => {
 };
 
 export const getMaxRegionId = async () => {
-  const maxRegionId = await prisma.region.aggregate({
-    _max: {
-      id: true,
-    },
-  });
-  return maxRegionId._max.id || 0;
+  const maxRegionId = await services.getMaxRegionId;
+  return maxRegionId;
 };
 
 export const getRegionsByName = async (req: Request, res: Response) => {
-  const { locale, name } = req.query;
+  const locale = req.query.locale as string;
+  const name = req.query.name as string;
 
-  const nameByLocale = getNameByLocale(locale as string);
-
-  const regions = await prisma.region.findMany({
-    where: {
-      [nameByLocale]: { contains: name as string },
-    },
-  });
+  const regions = await services.getRegionsByName(locale, name);
 
   try {
     return res.status(200).json(regions);

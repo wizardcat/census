@@ -1,17 +1,17 @@
 import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
 import express, { Application } from 'express';
-import { censusRoute, importData, regionsRoute } from './routes';
+import { censusRoutes, importDataRoutes, regionsRoutes } from './routes';
 
 const prisma = new PrismaClient();
 const app: Application = express();
-const port = 3001;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors({ origin: '*' }));
 
-app.use('/api', regionsRoute);
-app.use('/api', censusRoute);
-app.use('/api', importData);
+app.use('/api/regions', regionsRoutes);
+app.use('/api/census', censusRoutes);
+app.use('/api/import-data', importDataRoutes);
 
-const server = app.listen(port, () => console.log(`🚀 Server ready at: ${port}`));
+const server = app.listen(PORT, () => console.log(`🚀 Server ready at: ${PORT}`));

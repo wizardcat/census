@@ -1,7 +1,7 @@
-import { extractCensusData } from '@app/controllers/create-base.controller';
+import { importData } from '@app/controllers';
 import { Router } from 'express';
 const router: Router = Router();
 
-router.post('/import-data', extractCensusData);
+router.post('/', importData);
 
 export default router;

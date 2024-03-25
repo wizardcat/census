@@ -1,8 +1,8 @@
 import { DATA_SOURCE_CONFIG } from '@app/config';
-import { addCensus } from '@app/controllers/census.controller';
-import { addLanguageGroups } from '@app/controllers/language-groups.controller';
-import { addLanguages } from '@app/controllers/languages.controller';
+import { addCensus } from '@app/services';
+import { addLanguageGroups } from '@app/services/language-groups.service';
 import { CheerioAPI } from 'cheerio';
+import { addLanguages } from '../languages.service';
 import { parseCensusTable } from './parse-census-table';
 
 type ProcessCensusByRegionProps = {
