@@ -48,15 +48,16 @@ export const useRegionsTable = () => {
   }, [locale, page, rowsPerPage, lastIdList, regionNameFilter]);
 
   useEffect(() => {
-    if (regionsData?.regions.length > 0) {
-      setRegionId(regionsData?.regions[0].id);
+    if (!regionsData?.regions.length) {
+      setRegionId(0);
+      return;
     }
+
+    setRegionId(regionsData?.regions[0].id);
   }, [page, regionsData]);
 
   useEffect(() => {
-    if (regionId > 0) {
-      dispatch(setCurrentRegionId(regionId));
-    }
+    dispatch(setCurrentRegionId(regionId));
   }, [dispatch, regionId]);
 
   const handleListItemClick = (event: MouseEvent<HTMLElement>, id: number) => {

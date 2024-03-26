@@ -4,13 +4,6 @@ import { GetRegionParams } from '@app/types';
 import { Request, Response } from 'express';
 
 export const getRegions = async (req: TypedRequestQuery<GetRegionParams>, res: Response) => {
-  // const { locale, lastId, skip, take, region } = req.query;
-  // const locale = req.query.locale as string;
-  // const lastId = req.query.lastId as string;
-  // const skip = req.query.skip as string;
-  // const take = req.query.take as string;
-  // const region = req.query.region as string;
-
   const regions = await services.getRegions(req.query);
 
   try {
