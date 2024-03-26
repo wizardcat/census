@@ -73,8 +73,7 @@ export const getCensusByRegionName = async (locale: string, region: string) => {
 
   const regionIdResp = await prisma.region.findFirst({
     where: {
-      [nameByLocale]: { contains: region },
-      // [nameByLocale]: region
+      [nameByLocale]: { contains: `%${region}%`, mode: 'insensitive' },
     },
   });
 

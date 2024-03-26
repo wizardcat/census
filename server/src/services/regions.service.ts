@@ -49,14 +49,15 @@ export const getRegions = async ({ locale, lastId, skip, take, region }: GetRegi
     },
     where: {
       id: { gt: Number(lastId) || 0 },
-      [nameByLocale]: { contains: region as string },
+      [nameByLocale]: { contains: `%${region}%`, mode: 'insensitive' },
     },
   });
 
   const regionsCount = await prisma.region.count({
     where: {
       [nameByLocale]: {
-        contains: region as string,
+        contains: `%${region}%`,
+        mode: 'insensitive',
       },
     },
   });
@@ -68,22 +69,22 @@ export const getRegions = async ({ locale, lastId, skip, take, region }: GetRegi
   return regData;
 };
 
-export const getRegionsCountByName = async (name: string) => {
+export const getRegionsCountByName = async (region: string) => {
   const regionsCount = await prisma.region.count({
     where: {
-      nameEN: { contains: name as string },
+      nameEN: { contains: `%${region}%`, mode: 'insensitive' },
     },
   });
 
   return regionsCount;
 };
 
-export const getRegionIdByName = async (locale: string, name: string) => {
+export const getRegionIdByName = async (locale: string, region: string) => {
   const nameByLocale = getNameByLocale(locale as string);
 
   const regionId = await prisma.region.findFirst({
     where: {
-      [nameByLocale]: { contains: name as string },
+      [nameByLocale]: { contains: `%${region}%`, mode: 'insensitive' },
     },
   });
 
@@ -99,12 +100,12 @@ export const getMaxRegionId = async () => {
   return maxRegionId._max.id || 0;
 };
 
-export const getRegionsByName = async (locale: string, name: string) => {
+export const getRegionsByName = async (locale: string, region: string) => {
   const nameByLocale = getNameByLocale(locale as string);
 
   const regions = await prisma.region.findMany({
     where: {
-      [nameByLocale]: { contains: name as string },
+      [nameByLocale]: { contains: `%${region}%`, mode: 'insensitive' },
     },
   });
 

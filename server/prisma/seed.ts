@@ -1,10 +1,12 @@
 import csv from 'csv-parser';
 import fs from 'fs';
-import { addCensus } from '../src/controllers/census.controller';
-import { addDocuments } from '../src/controllers/documents.controller';
-import { addLanguageGroups } from '../src/controllers/language-groups.controller';
-import { addLanguages } from '../src/controllers/languages.controller';
-import { addRegions } from '../src/controllers/regions.controller';
+import {
+  addCensus,
+  addDocuments,
+  addLanguageGroups,
+  addLanguages,
+  addRegions,
+} from '../src/services';
 
 const convertValues = ({ header, index, value }) =>
   [
