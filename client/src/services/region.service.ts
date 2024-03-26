@@ -5,17 +5,19 @@ import axios from 'axios';
 const url = config.url.BASE_URL;
 
 export const getRegionsAll = async (params: QueryGetRegionsParams) => {
-  const paramsList = Object.keys(params)
-    .map((key) => key + '=' + params[key as keyof QueryGetRegionsParams])
-    .join('&');
-  const data = await axios.get(`${url}/api/regions/?${paramsList}`);
+  const { lastId, skip, take, locale, region } = params;
 
+  const searchRegion = region ? `&region=${region}` : '';
+
+  const data = await axios.get(
+    `${url}/api/regions/${locale}?lastId=${lastId}&skip=${skip}&take=${take}${searchRegion}`,
+  );
   return data;
 };
 
 export const getRegionsCountByName = async (regName: string) => {
   try {
-    const { data } = await axios.get(`${url}/api/regions/?regName=${regName}`);
+    const { data } = await axios.get(`${url}/api/regions?regName=${regName}`);
 
     return data;
   } catch (error) {

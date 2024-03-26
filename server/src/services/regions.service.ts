@@ -34,8 +34,21 @@ export const addRegions = async (regions: Region[]) => {
     });
 };
 
-export const getRegions = async ({ locale, lastId, skip, take, region }: GetRegionParams) => {
+export const getRegions = async (
+  locale: string,
+  { lastId, skip, take, region }: GetRegionParams,
+) => {
   const nameByLocale = getNameByLocale(locale as string);
+
+  let where = {
+    id: { gt: Number(lastId) || 0 },
+  };
+
+  const filterRegion = region
+    ? { [nameByLocale]: { contains: `%${region}%`, mode: 'insensitive' } }
+    : {};
+
+  if (region) where = { ...where, ...filterRegion };
 
   const regionsData = await prisma.region.findMany({
     take: Number(take) || 5,
@@ -47,19 +60,11 @@ export const getRegions = async ({ locale, lastId, skip, take, region }: GetRegi
     orderBy: {
       id: 'asc',
     },
-    where: {
-      id: { gt: Number(lastId) || 0 },
-      [nameByLocale]: { contains: `%${region}%`, mode: 'insensitive' },
-    },
+    where,
   });
 
   const regionsCount = await prisma.region.count({
-    where: {
-      [nameByLocale]: {
-        contains: `%${region}%`,
-        mode: 'insensitive',
-      },
-    },
+    where: filterRegion,
   });
 
   const regions = parsePropNames(regionsData);

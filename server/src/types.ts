@@ -45,9 +45,8 @@ export type CensusPageData = {
 };
 
 export type GetRegionParams = {
-  locale: string;
   lastId: string;
   skip: string;
   take: string;
-  region: string;
+  region?: string;
 };

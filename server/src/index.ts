@@ -14,4 +14,4 @@ app.use('/api/regions', regionsRoutes);
 app.use('/api/census', censusRoutes);
 app.use('/api/import-data', importDataRoutes);
 
-const server = app.listen(PORT, () => console.log(`🚀 Server ready at: ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server ready at: ${PORT}`));

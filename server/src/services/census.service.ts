@@ -28,6 +28,8 @@ export const addCensus = async (census: CensusRecord[]) => {
 export const getCensusByRegionId = async (locale: string, regionId: string) => {
   const nameByLocale = getNameByLocale(locale);
 
+  if (!nameByLocale) return;
+
   const censusData = await prisma.census.findMany({
     orderBy: {
       language: {
@@ -62,6 +64,8 @@ export const getCensusByRegionId = async (locale: string, regionId: string) => {
       regionId: Number(regionId),
     },
   });
+
+  if (!censusData) return;
 
   const census = parsePropNames(censusData);
 
@@ -69,54 +73,61 @@ export const getCensusByRegionId = async (locale: string, regionId: string) => {
 };
 
 export const getCensusByRegionName = async (locale: string, region: string) => {
-  const nameByLocale = getNameByLocale(locale);
+  try {
+    const nameByLocale = getNameByLocale(locale);
+    if (!nameByLocale) return;
 
-  const regionIdResp = await prisma.region.findFirst({
-    where: {
-      [nameByLocale]: { contains: `%${region}%`, mode: 'insensitive' },
-    },
-  });
-
-  const regionId = regionIdResp?.id;
-
-  if (!regionId) return;
-
-  const censusData = await prisma.census.findMany({
-    orderBy: {
-      language: {
-        id: 'asc',
-        // langGroup: {
-        //     [nameByLocale]: 'asc',
-        // },
-        // [nameByLocale]: 'asc',
+    const regionIdResp = await prisma.region.findFirst({
+      where: {
+        [nameByLocale]: { contains: `%${region}%`, mode: 'insensitive' },
       },
-    },
-    select: {
-      id: true,
-      males: true,
-      females: true,
+    });
 
-      language: {
-        select: {
-          id: true,
-          languageGroupId: false,
-          [nameByLocale]: true,
-          languageGroup: {
-            select: {
-              id: true,
-              [nameByLocale]: true,
+    const regionId = regionIdResp?.id;
+
+    if (!regionId) return;
+
+    const censusData = await prisma.census.findMany({
+      orderBy: {
+        language: {
+          id: 'asc',
+          // langGroup: {
+          //     [nameByLocale]: 'asc',
+          // },
+          // [nameByLocale]: 'asc',
+        },
+      },
+      select: {
+        id: true,
+        males: true,
+        females: true,
+
+        language: {
+          select: {
+            id: true,
+            languageGroupId: false,
+            [nameByLocale]: true,
+            languageGroup: {
+              select: {
+                id: true,
+                [nameByLocale]: true,
+              },
             },
           },
         },
       },
-    },
-    where: {
-      // [nameByLocale]: region,
-      regionId: Number(regionId),
-    },
-  });
+      where: {
+        // [nameByLocale]: region,
+        regionId: Number(regionId),
+      },
+    });
 
-  const census = parsePropNames(censusData);
+    if (!censusData) return;
 
-  return census;
+    const census = parsePropNames(censusData);
+
+    return census;
+  } catch (error) {
+    throw error;
+  }
 };
