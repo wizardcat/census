@@ -33,13 +33,13 @@ export const RegionsTable = () => {
       <Grid item sx={{ width: '100%' }}>
         <Box>
           <Paper sx={{ mb: 2 }}>
-            <TableContainer>
+            <TableContainer sx={{ height: 430 }}>
               <Table
-                sx={{ width: '90%', margin: '0 auto 0 auto', minWidth: 260, height: 430 }}
+                sx={{ width: '90%', margin: '0 auto 0 auto', minWidth: 260 }}
                 aria-labelledby="tableTitle"
                 size="small"
               >
-                <TableHead>
+                <TableHead sx={{ height: 50 }}>
                   <TableRow>
                     <TableCell align="left">
                       <Typography variant="subtitle2">
@@ -52,6 +52,7 @@ export const RegionsTable = () => {
                   {regionsData?.regions.map((region, idx) => {
                     return (
                       <TableRow
+                        sx={{ height: 36 }}
                         hover
                         onClick={(event: MouseEvent<HTMLElement>) =>
                           handleListItemClick(event, region.id)

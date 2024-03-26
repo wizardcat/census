@@ -17,7 +17,7 @@ export const CensusTable = () => {
       <Grid item>
         <Box sx={{ width: '100%' }}>
           <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: '79vh' }} component={Paper}>
+            <TableContainer sx={{ height: '79vh', width: '1112' }} component={Paper}>
               <Table stickyHeader size="small" aria-label="census table">
                 <CensusTableHeader />
                 <TableBody>

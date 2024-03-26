@@ -11,7 +11,7 @@ export const RegionFilter = () => {
     <Box component="form" noValidate autoComplete="off">
       <Paper sx={{ width: '100%', mb: 2 }}>
         <Input
-          sx={{ width: '100%', paddingLeft: 1 }}
+          sx={{ width: '100%', paddingLeft: 1, height: 43 }}
           placeholder={placeholderText}
           onChange={handleChange}
         />
